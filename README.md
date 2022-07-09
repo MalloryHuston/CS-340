@@ -47,14 +47,14 @@ Begin every day by pulling or fetching from the master to your local master.
 * Fetching will gather the most recent commits in a branch which you can then view and decide to merge or not
 * Once you have all the most recent updates on your master you can then merge those changes into your branch:
 <pre>
-<code>git checkout <branch you want to update>
-git merge <branch name you're merging from></code>
+<code>git checkout &lt;branch name you want to update&gt;
+git merge &lt;branch name you're merging from&gt;</code>
 </pre>
 
 * You may have to handle merge conflicts at this point. Note that files with merge conflicts are usually a different color in the sidebar.
 * Create a new branch
 <pre>
-<code>git checkout -b <div>&lt;new branch name&gt;</div></code>
+<code>git checkout -b &lt;new branch name&gt;</code>
 </pre>
 
 * This branch will start off with a copy of the branch you were on
