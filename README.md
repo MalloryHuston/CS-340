@@ -54,7 +54,7 @@ git merge <branch name you're merging from></code>
 * You may have to handle merge conflicts at this point. Note that files with merge conflicts are usually a different color in the sidebar.
 * Create a new branch
 <pre>
-<code>git checkout -b <new branch name></code>
+<code>git checkout -b '<new branch name>'</code>
 </pre>
 
 * This branch will start off with a copy of the branch you were on
