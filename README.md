@@ -23,7 +23,7 @@ Be sure to always check which branch you are on using “git status” before yo
 
 ### Merge your branch
 
-Once your branch is ready to be merged to master, follow these steps.
+Once your branch is ready to be merged to master, follow these steps:
 
 * While in your branch you will 
 <pre>
