@@ -124,10 +124,10 @@ INSERT INTO `concerts` VALUES (2,2),(4,2),(4,3),(2,4),(4,6),(1,7),(3,8),(3,9);
 UNLOCK TABLES;
 
 --
--- Table structure for table `concerts`
+-- Table structure for table `tickets`
 --
 
-DROP TABLE IF EXISTS `concerts`;
+DROP TABLE IF EXISTS `tickets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `concerts` (
@@ -141,23 +141,23 @@ CREATE TABLE `concerts` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `concerts`
+-- Dumping data for table `tickets`
 --
 
-LOCK TABLES `concerts` WRITE;
+LOCK TABLES `tickets` WRITE;
 /*!40000 ALTER TABLE `concerts` DISABLE KEYS */;
-INSERT INTO `concerts` VALUES (2,2),(4,2),(4,3),(2,4),(4,6),(1,7),(3,8),(3,9);
-/*!40000 ALTER TABLE `concerts` ENABLE KEYS */;
+INSERT INTO `tickets` VALUES (2,2),(4,2),(4,3),(2,4),(4,6),(1,7),(3,8),(3,9);
+/*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `concerts`
+-- Table structure for table `concerts_has_employees`
 --
 
-DROP TABLE IF EXISTS `concerts`;
+DROP TABLE IF EXISTS `concerts_has_employees`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `concerts` (
+CREATE TABLE `concerts_has_employees` (
   `cid` int(11) NOT NULL DEFAULT '0',
   `pid` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`cid`,`pid`),
@@ -168,23 +168,23 @@ CREATE TABLE `concerts` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `concerts`
+-- Dumping data for table `concerts_has_employees`
 --
 
-LOCK TABLES `concerts` WRITE;
+LOCK TABLES `concerts_has_employees` WRITE;
 /*!40000 ALTER TABLE `concerts` DISABLE KEYS */;
-INSERT INTO `concerts` VALUES (2,2),(4,2),(4,3),(2,4),(4,6),(1,7),(3,8),(3,9);
-/*!40000 ALTER TABLE `concerts` ENABLE KEYS */;
+INSERT INTO `concerts_has_employees` VALUES (2,2),(4,2),(4,3),(2,4),(4,6),(1,7),(3,8),(3,9);
+/*!40000 ALTER TABLE `concerts_has_employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `concerts`
+-- Table structure for table `concerts_has_artists`
 --
 
-DROP TABLE IF EXISTS `concerts`;
+DROP TABLE IF EXISTS `concerts_has_artists`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `concerts` (
+CREATE TABLE `concerts_has_artists` (
   `cid` int(11) NOT NULL DEFAULT '0',
   `pid` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`cid`,`pid`),
@@ -195,13 +195,13 @@ CREATE TABLE `concerts` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `concerts`
+-- Dumping data for table `concerts_has_artists`
 --
 
-LOCK TABLES `concerts` WRITE;
+LOCK TABLES `concerts_has_artists` WRITE;
 /*!40000 ALTER TABLE `concerts` DISABLE KEYS */;
-INSERT INTO `concerts` VALUES (2,2),(4,2),(4,3),(2,4),(4,6),(1,7),(3,8),(3,9);
-/*!40000 ALTER TABLE `concerts` ENABLE KEYS */;
+INSERT INTO `concerts_has_artists` VALUES (2,2),(4,2),(4,3),(2,4),(4,6),(1,7),(3,8),(3,9);
+/*!40000 ALTER TABLE `concerts_has_artists` ENABLE KEYS */;
 UNLOCK TABLES;
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
