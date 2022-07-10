@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.1.66, for redhat-linux-gnu (x86_64)
+-- MySQL dump 10.19  Distrib 10.6.8-MariaDB, for Win64 (AMD64)
 --
--- Host: mysql.eecs.oregonstate.edu    Database: CS275
+-- Host: mysql.eecs.oregonstate.edu    Database: clearwatercasino
 -- ------------------------------------------------------
--- Server version	5.1.65-community-log
+-- Server version	10.6.8-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -132,4 +132,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-02-04 12:54:40
+-- Dump completed on 2022-07-10 12:54:40
