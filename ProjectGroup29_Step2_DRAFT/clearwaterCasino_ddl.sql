@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `bsg_planets`
+-- Table structure for table `customers`
 --
 
-DROP TABLE IF EXISTS `bsg_planets`;
+DROP TABLE IF EXISTS `customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bsg_planets` (
+CREATE TABLE `customers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `population` bigint(20) DEFAULT NULL,
@@ -34,23 +34,23 @@ CREATE TABLE `bsg_planets` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bsg_planets`
+-- Dumping data for table `customers`
 --
 
-LOCK TABLES `bsg_planets` WRITE;
-/*!40000 ALTER TABLE `bsg_planets` DISABLE KEYS */;
+LOCK TABLES `customers` WRITE;
+/*!40000 ALTER TABLE `customers` DISABLE KEYS */;
 INSERT INTO `bsg_planets` VALUES (1,'Gemenon',2800000000,'Old Gemenese','Oranu'),(2,'Leonis',2600000000,'Leonese','Luminere'),(3,'Caprica',4900000000,'Caprican','Caprica City'),(7,'Sagittaron',1700000000,NULL,'Tawa'),(16,'Aquaria',25000,NULL,NULL),(17,'Canceron',6700000000,NULL,'Hades'),(18,'Libran',2100000,NULL,NULL),(19,'Picon',1400000000,NULL,'Queestown'),(20,'Scorpia',450000000,NULL,'Celeste'),(21,'Tauron',2500000000,'Tauron','Hypatia'),(22,'Virgon',4300000000,NULL,'Boskirk');
-/*!40000 ALTER TABLE `bsg_planets` ENABLE KEYS */;
+/*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `bsg_cert`
+-- Table structure for table `employees`
 --
 
-DROP TABLE IF EXISTS `bsg_cert`;
+DROP TABLE IF EXISTS `employees`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bsg_cert` (
+CREATE TABLE `employees` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
@@ -58,13 +58,13 @@ CREATE TABLE `bsg_cert` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bsg_cert`
+-- Dumping data for table `employees`
 --
 
-LOCK TABLES `bsg_cert` WRITE;
-/*!40000 ALTER TABLE `bsg_cert` DISABLE KEYS */;
-INSERT INTO `bsg_cert` VALUES (1,'Raptor'),(2,'Viper'),(3,'Mechanic'),(4,'Command');
-/*!40000 ALTER TABLE `bsg_cert` ENABLE KEYS */;
+LOCK TABLES `employees` WRITE;
+/*!40000 ALTER TABLE `employees` DISABLE KEYS */;
+INSERT INTO `employees` VALUES (1,'Raptor'),(2,'Viper'),(3,'Mechanic'),(4,'Command');
+/*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
