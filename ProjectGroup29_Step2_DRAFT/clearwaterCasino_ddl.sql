@@ -203,7 +203,6 @@ LOCK TABLES `concerts_has_artists` WRITE;
 INSERT INTO `concerts_has_artists` VALUES (2,2),(4,2),(4,3),(2,4),(4,6),(1,7),(3,8),(3,9);
 /*!40000 ALTER TABLE `concerts_has_artists` ENABLE KEYS */;
 UNLOCK TABLES;
-
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
