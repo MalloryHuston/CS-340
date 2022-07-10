@@ -93,17 +93,17 @@ CREATE TABLE `artists` (
 LOCK TABLES `artists` WRITE;
 /*!40000 ALTER TABLE `artists` DISABLE KEYS */;
 INSERT INTO `artists` VALUES (1,'William','Adama',3,61),(2,'Lee','Adama',3,30),(3,'Laura','Roslin',3,NULL),(4,'Kara','Thrace',3,NULL),(5,'Gaius','Baltar',3,NULL),(6,'Saul','Tigh',NULL,71),(7,'Karl','Agathon',1,NULL),(8,'Galen','Tyrol',1,32),(9,'Callandra','Henderson',NULL,NULL);
-/*!40000 ALTER TABLE `bsg_people` ENABLE KEYS */;
+/*!40000 ALTER TABLE `artists` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `bsg_cert_people`
+-- Table structure for table `concerts`
 --
 
-DROP TABLE IF EXISTS `bsg_cert_people`;
+DROP TABLE IF EXISTS `concerts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bsg_cert_people` (
+CREATE TABLE `concerts` (
   `cid` int(11) NOT NULL DEFAULT '0',
   `pid` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`cid`,`pid`),
@@ -114,14 +114,96 @@ CREATE TABLE `bsg_cert_people` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bsg_cert_people`
+-- Dumping data for table `concerts`
 --
 
-LOCK TABLES `bsg_cert_people` WRITE;
-/*!40000 ALTER TABLE `bsg_cert_people` DISABLE KEYS */;
-INSERT INTO `bsg_cert_people` VALUES (2,2),(4,2),(4,3),(2,4),(4,6),(1,7),(3,8),(3,9);
-/*!40000 ALTER TABLE `bsg_cert_people` ENABLE KEYS */;
+LOCK TABLES `concerts` WRITE;
+/*!40000 ALTER TABLE `concerts` DISABLE KEYS */;
+INSERT INTO `concerts` VALUES (2,2),(4,2),(4,3),(2,4),(4,6),(1,7),(3,8),(3,9);
+/*!40000 ALTER TABLE `concerts` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `concerts`
+--
+
+DROP TABLE IF EXISTS `concerts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `concerts` (
+  `cid` int(11) NOT NULL DEFAULT '0',
+  `pid` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cid`,`pid`),
+  KEY `pid` (`pid`),
+  CONSTRAINT `bsg_cert_people_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `bsg_cert` (`id`),
+  CONSTRAINT `bsg_cert_people_ibfk_2` FOREIGN KEY (`pid`) REFERENCES `bsg_people` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `concerts`
+--
+
+LOCK TABLES `concerts` WRITE;
+/*!40000 ALTER TABLE `concerts` DISABLE KEYS */;
+INSERT INTO `concerts` VALUES (2,2),(4,2),(4,3),(2,4),(4,6),(1,7),(3,8),(3,9);
+/*!40000 ALTER TABLE `concerts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `concerts`
+--
+
+DROP TABLE IF EXISTS `concerts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `concerts` (
+  `cid` int(11) NOT NULL DEFAULT '0',
+  `pid` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cid`,`pid`),
+  KEY `pid` (`pid`),
+  CONSTRAINT `bsg_cert_people_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `bsg_cert` (`id`),
+  CONSTRAINT `bsg_cert_people_ibfk_2` FOREIGN KEY (`pid`) REFERENCES `bsg_people` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `concerts`
+--
+
+LOCK TABLES `concerts` WRITE;
+/*!40000 ALTER TABLE `concerts` DISABLE KEYS */;
+INSERT INTO `concerts` VALUES (2,2),(4,2),(4,3),(2,4),(4,6),(1,7),(3,8),(3,9);
+/*!40000 ALTER TABLE `concerts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `concerts`
+--
+
+DROP TABLE IF EXISTS `concerts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `concerts` (
+  `cid` int(11) NOT NULL DEFAULT '0',
+  `pid` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cid`,`pid`),
+  KEY `pid` (`pid`),
+  CONSTRAINT `bsg_cert_people_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `bsg_cert` (`id`),
+  CONSTRAINT `bsg_cert_people_ibfk_2` FOREIGN KEY (`pid`) REFERENCES `bsg_people` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `concerts`
+--
+
+LOCK TABLES `concerts` WRITE;
+/*!40000 ALTER TABLE `concerts` DISABLE KEYS */;
+INSERT INTO `concerts` VALUES (2,2),(4,2),(4,3),(2,4),(4,6),(1,7),(3,8),(3,9);
+/*!40000 ALTER TABLE `concerts` ENABLE KEYS */;
+UNLOCK TABLES;
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
