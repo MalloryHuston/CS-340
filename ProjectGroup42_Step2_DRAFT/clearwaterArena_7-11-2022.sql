@@ -169,8 +169,7 @@ INSERT INTO `Fans` (`fanID`, `firstName`, `lastName`, `email`, `phoneNumber`, `a
 CREATE TABLE `Tickets` (
   `ticketID` int(11) NOT NULL,
   `Concerts_concertID` int(11) NOT NULL,
-  `Fans_fanID` int(11) NOT NULL,
-  `Fans_Concerts_concertID` int(11) NOT NULL
+  `Fans_fanID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
