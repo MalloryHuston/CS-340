@@ -4,7 +4,7 @@ Coursework for final project of Oregon State University's CS340 Intro to Databas
 
 <b>Team Name:</b> Savage and Average<br>
 <b>Team Members:</b> Mallory Huston and Sory Diagouraga
-<b>Project Name:</b><i>Clearwater Arena</i>
+<br><b>Project Name:</b> <i>Clearwater Arena</i>
 
 ## Ground Rules:
 
