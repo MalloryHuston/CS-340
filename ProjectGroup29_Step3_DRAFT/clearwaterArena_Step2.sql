@@ -284,21 +284,21 @@ ALTER TABLE `Tickets`
 -- Constraints for table `Concerts_has_Artists`
 --
 ALTER TABLE `Concerts_has_Artists`
-  ADD CONSTRAINT `fk_Concerts_has_Artists_Artists1` FOREIGN KEY (`Artists_artistID`) REFERENCES `Artists` (`artistID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Concerts_has_Artists_Concerts1` FOREIGN KEY (`Concerts_concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Concerts_has_Artists_Artists1` FOREIGN KEY (`Artists_artistID`) REFERENCES `Artists` (`artistID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_Concerts_has_Artists_Concerts1` FOREIGN KEY (`Concerts_concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE NO ACTION;
 
 --
 -- Constraints for table `Concerts_has_Employees`
 --
 ALTER TABLE `Concerts_has_Employees`
-  ADD CONSTRAINT `fk_Concerts_has_Employees_Concerts1` FOREIGN KEY (`Concerts_concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Concerts_has_Employees_Employees1` FOREIGN KEY (`Employees_employeeID`) REFERENCES `Employees` (`employeeID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Concerts_has_Employees_Concerts1` FOREIGN KEY (`Concerts_concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE NO ACTION,
+  ADD CONSTRAINT `fk_Concerts_has_Employees_Employees1` FOREIGN KEY (`Employees_employeeID`) REFERENCES `Employees` (`employeeID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `Fans`
 --
 ALTER TABLE `Fans`
-  ADD CONSTRAINT `fk_Customers_Concerts1` FOREIGN KEY (`Concerts_concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Customers_Concerts1` FOREIGN KEY (`Concerts_concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `Tickets`
