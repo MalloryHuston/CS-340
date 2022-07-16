@@ -7,7 +7,7 @@ Coursework for final project of Oregon State University's CS340 Intro to Databas
 
 ## Ground Rules:
 
-### Create a new branch for each new feature
+### 1. Create a new branch for each new feature
 
 From this point, each member of the group will create a new branch for any feature they are adding to the project. Do this by entering either of these two options:
 
@@ -21,7 +21,7 @@ From this point, each member of the group will create a new branch for any featu
 
 Be sure to always check which branch you are on using “git status” before you begin working!
 
-### Merge your branch
+### 2. Merge your branch
 
 Once your branch is ready to be merged to master, follow these steps:
 
@@ -39,7 +39,7 @@ git push origin <branch name> – This creates the branch remotely and pushes to
 
 * Once someone reviews the pull request, they will resolve any issues or conflicts that come up and approve the pull request to be merged into the master
 
-### Start each day off right
+### 3. Start each day off right
 
 Begin every day by pulling or fetching from the master to your local master.
 
