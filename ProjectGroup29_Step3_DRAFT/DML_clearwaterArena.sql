@@ -1,40 +1,68 @@
--- These are some Database Manipulation queries for a partially implemented Project Website 
--- using the bsg database.
--- Your submission should contain ALL the queries required to implement ALL the
--- functionalities listed in the Project Specs.
+-- READ OPERATIONS
+-- genres
+-- get all concerts
+SELECT Concerts.concertID from Concerts;
 
--- get all Planet IDs and Names to populate the Homeworld dropdown
-SELECT planet_id, name FROM bsg_planets
+-- artists
+-- get all artists
+SELECT * from Artists;
 
--- get all characters and their homeworld name for the List People page
-SELECT bsg_people.character_id, fname, lname, bsg_planets.name AS homeworld, age FROM bsg_people INNER JOIN bsg_planets ON homeworld = bsg_planets.planet_id
 
--- get a single character's data for the Update People form
-SELECT character_id, fname, lname, homeworld, age FROM bsg_people WHERE character_id = :character_ID_selected_from_browse_character_page
+-- albums
+-- get all albums and the corresponding artist
+SELECT Albums.albumID, Albums.title, Albums.description, Artists.name AS artist FROM Albums
+Inner JOIN Artists ON Albums.albumID = Artists.artistID;
 
--- get all character's data to populate a dropdown for associating with a certificate  
-SELECT character_id AS pid, fname, lname FROm bsg_people 
--- get all certificates to populate a dropdown for associating with people
-SELECT certification_id AS cid, title FROM bsg_cert
+-- songs
+-- get all songs, the corresponding artist, genre, and album
+SELECT Songs.songID, Songs.title, Songs.duration, Songs.streams, Albums.title as album, Artists.name as artist, Genres.genreID as genre FROM Songs
+Inner Join Albums ON Albums.albumID = Songs.albumID
+INNER JOIN Artists ON Artists.artistID = Songs.artistID
+INNER JOIN Genres ON Genres.genreID = Songs.genreID;
 
--- get all peoople with their current associated certificates to list
-SELECT pid, cid, CONCAT(fname,' ',lname) AS name, title AS certificate 
-FROM bsg_people 
-INNER JOIN bsg_cert_people ON bsg_people.character_id = bsg_cert_people.pid 
-INNER JOIN bsg_cert on bsg_cert.certification_id = bsg_cert_people.cid 
-ORDER BY name, certificate
+-- customers
+-- get all customers
+SELECT Customers.customerID, Customers.username, Customers.password, Customers.email, Customers.isPremium FROM Customers;
 
--- add a new character
-INSERT INTO bsg_people (fname, lname, homeworld, age) VALUES (:fnameInput, :lnameInput, :homeworld_id_from_dropdown_Input, :ageInput)
 
--- associate a character with a certificate (M-to-M relationship addition)
-INSERT INTO bsg_cert_people (pid, cid) VALUES (:character_id_from_dropdown_Input, :certification_id_from_dropdown_Input)
+-- playlists
+-- get all playlists and all songs within the playlist
+SELECT Playlists.name, Playlists.streams, Playlists.description, Customers.username as user FROM Playlists_Songs
+INNER JOIN Playlists on Playlists_Songs.playlistID = Playlists.playlistID
+INNER JOIN Customers on Customers.customerID = Playlists.customerID;
 
--- update a character's data based on submission of the Update Character form 
-UPDATE bsg_people SET fname = :fnameInput, lname= :lnameInput, homeworld = :homeworld_id_from_dropdown_Input, age= :ageInput WHERE id= :character_ID_from_the_update_form
+-- CREATE OPERATIONS
+-- create a new genre
+INSERT INTO Genres (Genres.genreID) VALUES (:genreIdInput);
 
--- delete a character
-DELETE FROM bsg_people WHERE id = :character_ID_selected_from_browse_character_page
+-- create a new Artist
+INSERT INTO Artists (Artists.name, Artists.bio) VALUES (:nameInput, :bioInput);
 
--- dis-associate a certificate from a person (M-to-M relationship deletion)
-DELETE FROM bsg_cert_people WHERE pid = :character_ID_selected_from_certificate_and_character_list AND cid = :certification_ID_selected_from-certificate_and_character_list
+-- create a new Album
+INSERT INTO Albums (Albums.title, Albums.description, Albums.artistID) VALUES (:titleInput, :descriptionInput, :artistIDFromDropDown);
+
+-- create a new Song
+INSERT INTO Songs (Songs.title, Songs.duration, Songs.albumID, Songs.artistID, Songs.genreID) VALUES (:titleInput, :durationInput, :albumIDFromDropDown, :artistIDFromDropDown, :genreIDFromDropDown);
+
+-- create a new Customer
+INSERT INTO Customers (Customers.username, Customers.password, Customers.email, Customers.isPremium) VALUES (:usernameInput, :passwordInput, :emailInput, :isPremiumInput);
+
+-- create a new Playlist
+INSERT INTO Playlists (Playlists.name, Playlists.description, Playlists.customerID) VALUES (:nameInput, :descriptionInput, :customerIDFromDropDown);
+
+-- add a song to a Playlist
+INSERT INTO Playlists_Songs (Playlists_Songs.playlistID, Playlists_Songs.songID) VALUES (:playlistInput, :songInput)
+
+-- UPDATE OPERATIONS
+-- update a customer
+UPDATE Customers
+    SET username = :usernameInput, password = :passwordInput, email = :emailInput, isPremium = :isPremiumInput
+    WHERE customerID = :selectedCustomerID
+
+-- DELETE OPERATIONS
+-- delete a song from a playlist
+DELETE FROM Playlists_Songs WHERE
+    (
+        SELECT playlist_songID FROM Playlists_Songs
+        WHERE playlistID = :selectedPlaylist AND songID = :selectedSong
+    )
