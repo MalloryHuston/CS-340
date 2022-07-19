@@ -49,30 +49,33 @@ INNER JOIN Fans on Tickets.ticketID = Fans.fanID
 INNER JOIN Concerts on Tickets.ticketID = Concerts.concertID;
 
 -- CREATE OPERATIONS
--- create a new genre
+-- create a new Concert
 INSERT INTO Genres (Genres.genreID) VALUES (:genreIdInput);
 
 -- create a new Artist
 INSERT INTO Artists (Artists.name, Artists.bio) VALUES (:nameInput, :bioInput);
 
--- create a new Album
+-- create a new Ticket
 INSERT INTO Albums (Albums.title, Albums.description, Albums.artistID) VALUES (:titleInput, :descriptionInput, :artistIDFromDropDown);
 
--- create a new Song
+-- create a new Employee
 INSERT INTO Songs (Songs.title, Songs.duration, Songs.albumID, Songs.artistID, Songs.genreID) VALUES (:titleInput, :durationInput, :albumIDFromDropDown, :artistIDFromDropDown, :genreIDFromDropDown);
 
--- create a new Customer
+-- create a new Fan
 INSERT INTO Customers (Customers.username, Customers.password, Customers.email, Customers.isPremium) VALUES (:usernameInput, :passwordInput, :emailInput, :isPremiumInput);
 
--- create a new Playlist
-INSERT INTO Playlists (Playlists.name, Playlists.description, Playlists.customerID) VALUES (:nameInput, :descriptionInput, :customerIDFromDropDown);
-
--- add a song to a Playlist
-INSERT INTO Playlists_Songs (Playlists_Songs.playlistID, Playlists_Songs.songID) VALUES (:playlistInput, :songInput)
+-- add a ticket to a Concert
+INSERT INTO Tickets (Concerts.concertID, Tickets.ticketID) VALUES (:concertInput, :ticketInput)
 
 -- UPDATE OPERATIONS
--- update a customer
-UPDATE Customers
+-- update a fan
+UPDATE Fans
+    SET username = :usernameInput, password = :passwordInput, email = :emailInput, isPremium = :isPremiumInput
+    WHERE customerID = :selectedCustomerID
+    
+-- UPDATE OPERATIONS
+-- update an employee
+UPDATE Employees
     SET username = :usernameInput, password = :passwordInput, email = :emailInput, isPremium = :isPremiumInput
     WHERE customerID = :selectedCustomerID
 
