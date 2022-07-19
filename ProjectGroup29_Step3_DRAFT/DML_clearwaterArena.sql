@@ -6,28 +6,30 @@
 -- READ OPERATIONS
 -- concerts
 -- get all concerts
-SELECT Concerts.concertID from Concerts;
+SELECT * FROM Concerts;
 
 -- artists
 -- get all artists
-SELECT * from Artists;
+SELECT * FROM Artists;
 
 
--- albums
--- get all albums and the corresponding artist
-SELECT Albums.albumID, Albums.title, Albums.description, Artists.name AS artist FROM Albums
-Inner JOIN Artists ON Albums.albumID = Artists.artistID;
+-- concerts_has_artists
+-- get all concerts and the corresponding artists
+SELECT Concerts.concertID, Artists.artistID as artist from Concerts
+Inner JOIN Artists ON Concerts.concertID = Artists.artistID;
 
--- songs
--- get all songs, the corresponding artist, genre, and album
-SELECT Songs.songID, Songs.title, Songs.duration, Songs.streams, Albums.title as album, Artists.name as artist, Genres.genreID as genre FROM Songs
-Inner Join Albums ON Albums.albumID = Songs.albumID
-INNER JOIN Artists ON Artists.artistID = Songs.artistID
-INNER JOIN Genres ON Genres.genreID = Songs.genreID;
+-- concerts_has_employees
+-- get all concerts and the corresponding employees
+SELECT Concerts.concertID, Employees.employeeID as employee from Concerts
+Inner JOIN Artists ON Concerts.concertID = Employees.employeeID;
 
--- customers
--- get all customers
-SELECT Customers.customerID, Customers.username, Customers.password, Customers.email, Customers.isPremium FROM Customers;
+-- employees
+-- get all employees
+SELECT Employees.employeeID, Employees.firstName, Employees.lastName, Employees.role, Employees.email, Employees.phoneNumber FROM Employees;
+
+-- fans
+-- get all fans
+SELECT Fans.fanID, Fans.firstName, Fans.lastName, Fans.email, Fans.phoneNumber, Fans.streetAddress, Fans.city, Fans.state, Fans.zipCode, Fans.concertID FROM Fans;
 
 
 -- playlists
