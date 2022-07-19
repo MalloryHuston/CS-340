@@ -1,3 +1,21 @@
-/* CSS Document */
+th, td { 
+    border: 2px solid black;
+    padding: 5px;
+}
+thead th {
+    width: 3%
+}
+
+#divstyle {
+    height: 600px;
+    width: 600px;
+    margin-top:30px;
+    background-color:white;
+    margin: 0 auto;
+    text-align:center;
+    border-radius:5px;
+    display:center;
+}
+
 
 
