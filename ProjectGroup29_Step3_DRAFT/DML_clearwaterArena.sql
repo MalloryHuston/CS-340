@@ -70,7 +70,7 @@ UPDATE Fans
 -- UPDATE OPERATIONS
 -- update an employee
 UPDATE Employees
-    SET fanID = :Input, password = :passwordInput, email = :emailInput, isPremium = :isPremiumInput
+    SET firstName = :firstNameInput, lastName = :lastNameInput, role = :roleInput, phoneNumber = :phoneNumberInput
     WHERE employeeID = :selectedEmployeeID
 
 -- DELETE OPERATIONS
