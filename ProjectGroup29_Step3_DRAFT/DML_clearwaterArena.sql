@@ -12,6 +12,10 @@ SELECT * FROM Concerts;
 -- get all artists
 SELECT * FROM Artists;
 
+-- tickets
+-- get all tickets
+SELECT * FROM Tickets;
+
 
 -- concerts_has_artists
 -- get all concerts and the corresponding artists
@@ -21,7 +25,7 @@ Inner JOIN Artists ON Concerts.concertID = Artists.artistID;
 -- concerts_has_employees
 -- get all concerts and the corresponding employees
 SELECT Concerts.concertID, Employees.employeeID as employee from Concerts
-Inner JOIN Artists ON Concerts.concertID = Employees.employeeID;
+Inner JOIN Employees ON Concerts.concertID = Employees.employeeID;
 
 -- employees
 -- get all employees
@@ -37,6 +41,12 @@ SELECT Fans.fanID, Fans.firstName, Fans.lastName, Fans.email, Fans.phoneNumber, 
 SELECT Playlists.name, Playlists.streams, Playlists.description, Customers.username as user FROM Playlists_Songs
 INNER JOIN Playlists on Playlists_Songs.playlistID = Playlists.playlistID
 INNER JOIN Customers on Customers.customerID = Playlists.customerID;
+
+-- tickets
+-- get all concerts and fans within the tickets
+SELECT Tickets.ticketID, Fans.fanID, Concerts.concertID as ticketID FROM Tickets
+INNER JOIN Fans on Tickets.ticketID = Fans.fanID
+INNER JOIN Concerts on Tickets.ticketID = Concerts.concertID;
 
 -- CREATE OPERATIONS
 -- create a new genre
@@ -67,9 +77,9 @@ UPDATE Customers
     WHERE customerID = :selectedCustomerID
 
 -- DELETE OPERATIONS
--- delete a song from a playlist
-DELETE FROM Playlists_Songs WHERE
+-- delete a ticket from a concert
+DELETE FROM Tickets WHERE
     (
-        SELECT playlist_songID FROM Playlists_Songs
-        WHERE playlistID = :selectedPlaylist AND songID = :selectedSong
+        SELECT Concerts.concertID FROM Tickets
+        WHERE concertID = :selectedConcert AND ticketID = :selectedTicket
     )
