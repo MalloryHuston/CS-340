@@ -64,14 +64,14 @@ INSERT INTO Tickets (Concerts.concertID, Tickets.ticketID) VALUES (:concertInput
 -- UPDATE OPERATIONS
 -- update a fan
 UPDATE Fans
-    SET username = :usernameInput, password = :passwordInput, email = :emailInput, isPremium = :isPremiumInput
-    WHERE customerID = :selectedCustomerID
+    SET firstName = :firstNameInput, lastName = :lastNameInput, email = :emailInput, streetAddress = :streetAddressInput, city = :cityInput, state = :stateInput, zipCode = :zipCodeInput
+    WHERE fanID = :selectedFanID
     
 -- UPDATE OPERATIONS
 -- update an employee
 UPDATE Employees
-    SET username = :usernameInput, password = :passwordInput, email = :emailInput, isPremium = :isPremiumInput
-    WHERE customerID = :selectedCustomerID
+    SET fanID = :Input, password = :passwordInput, email = :emailInput, isPremium = :isPremiumInput
+    WHERE employeeID = :selectedEmployeeID
 
 -- DELETE OPERATIONS
 -- delete a ticket from a concert
