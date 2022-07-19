@@ -36,12 +36,6 @@ SELECT Employees.employeeID, Employees.firstName, Employees.lastName, Employees.
 SELECT Fans.fanID, Fans.firstName, Fans.lastName, Fans.email, Fans.phoneNumber, Fans.streetAddress, Fans.city, Fans.state, Fans.zipCode, Fans.concertID FROM Fans;
 
 
--- playlists
--- get all playlists and all songs within the playlist
-SELECT Playlists.name, Playlists.streams, Playlists.description, Customers.username as user FROM Playlists_Songs
-INNER JOIN Playlists on Playlists_Songs.playlistID = Playlists.playlistID
-INNER JOIN Customers on Customers.customerID = Playlists.customerID;
-
 -- tickets
 -- get all concerts and fans within the tickets
 SELECT Tickets.ticketID, Fans.fanID, Concerts.concertID as ticketID FROM Tickets
