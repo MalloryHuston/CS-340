@@ -1,5 +1,10 @@
+-- These are some Database Manipulation queries for a partially implemented Project Website 
+-- using the Clearwater Arena database.
+-- Your submission should contain ALL the queries required to implement ALL the
+-- functionalities listed in the Project Specs.
+
 -- READ OPERATIONS
--- genres
+-- concerts
 -- get all concerts
 SELECT Concerts.concertID from Concerts;
 
