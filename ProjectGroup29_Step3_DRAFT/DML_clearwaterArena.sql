@@ -44,19 +44,19 @@ INNER JOIN Concerts on Tickets.ticketID = Concerts.concertID;
 
 -- CREATE OPERATIONS
 -- create a new Concert
-INSERT INTO Genres (Genres.genreID) VALUES (:genreIdInput);
+INSERT INTO Concerts (Concerts.concertDate, Concerts.numberOfTickets) VALUES (:concertDateInput, :numberOfTicketsInput);
 
 -- create a new Artist
-INSERT INTO Artists (Artists.name, Artists.bio) VALUES (:nameInput, :bioInput);
+INSERT INTO Artists (Artists.name, Artists.artistID, Artists.phoneNumber) VALUES (:nameInput, :artistIDInput, :phoneNumberInput);
 
 -- create a new Ticket
-INSERT INTO Albums (Albums.title, Albums.description, Albums.artistID) VALUES (:titleInput, :descriptionInput, :artistIDFromDropDown);
+INSERT INTO Tickets (Tickets.concertID, Tickets.fanID) VALUES (:concertIDInput, :fanIDInput);
 
 -- create a new Employee
-INSERT INTO Songs (Songs.title, Songs.duration, Songs.albumID, Songs.artistID, Songs.genreID) VALUES (:titleInput, :durationInput, :albumIDFromDropDown, :artistIDFromDropDown, :genreIDFromDropDown);
+INSERT INTO Employees (Employees.firstName, Employees.lastName, Employees.role, Employees.email, Employees.phoneNumber) VALUES (:firstNameInput, :lastNameInput, :roleFromDropDown, :emailInput, :phoneNumberInput);
 
 -- create a new Fan
-INSERT INTO Customers (Customers.username, Customers.password, Customers.email, Customers.isPremium) VALUES (:usernameInput, :passwordInput, :emailInput, :isPremiumInput);
+INSERT INTO Fans (Customers.username, Customers.password, Customers.email, Customers.isPremium) VALUES (:usernameInput, :passwordInput, :emailInput, :isPremiumInput);
 
 -- add a ticket to a Concert
 INSERT INTO Tickets (Concerts.concertID, Tickets.ticketID) VALUES (:concertInput, :ticketInput)
