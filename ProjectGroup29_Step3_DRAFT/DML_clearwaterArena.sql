@@ -64,7 +64,7 @@ INSERT INTO Tickets (Concerts.concertID, Tickets.ticketID) VALUES (:concertInput
 -- UPDATE OPERATIONS
 -- update a fan
 UPDATE Fans
-    SET firstName = :firstNameInput, lastName = :lastNameInput, email = :emailInput, streetAddress = :streetAddressInput, city = :cityInput, state = :stateInput, zipCode = :zipCodeInput
+    SET firstName = :firstNameInput, lastName = :lastNameInput, email = :emailInput, streetAddress = :streetAddressInput, city = :cityInput, state = :stateInput, zipCode = :zipCodeInput, concertID = :concertIDInput
     WHERE fanID = :selectedFanID
     
 -- UPDATE OPERATIONS
