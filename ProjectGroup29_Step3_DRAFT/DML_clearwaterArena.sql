@@ -3,7 +3,6 @@
 -- Your submission should contain ALL the queries required to implement ALL the
 -- functionalities listed in the Project Specs.
 
-
 -- READ OPERATIONS
 -- artists
 -- get all artists
