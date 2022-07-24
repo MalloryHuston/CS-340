@@ -49,7 +49,7 @@ INSERT INTO Concerts (Concerts.concertDate, Concerts.numberOfTickets) VALUES (:c
 INSERT INTO Artists (Artists.name, Artists.phoneNumber) VALUES (:nameInput, :phoneNumberInput);
 
 -- create a new Ticket
-INSERT INTO Tickets (Tickets.concertID, Tickets.fanID) VALUES (:concertIDInput, :fanIDInput);
+INSERT INTO Tickets (Tickets.concertID, Tickets.fanID) VALUES (:concertIDFromDropDown, :fanIDFromDropDown);
 
 -- create a new Employee
 INSERT INTO Employees (Employees.firstName, Employees.lastName, Employees.role, Employees.email, Employees.phoneNumber) VALUES (:firstNameInput, :lastNameInput, :roleInput, :emailInput, :phoneNumberInput);
@@ -83,20 +83,19 @@ UPDATE Artists
 DELETE FROM Tickets WHERE
     (
         SELECT Tickets.concertID FROM Tickets
-        WHERE concertID = :selectedConcert AND ticketID = :selectedTicket
+        WHERE concertID = :selectedConcertID AND ticketID = :selectedTicketID
     )
 
 -- delete an employee from a concert
 DELETE FROM Employees WHERE
     (
         SELECT Employees.employeeID FROM Concert_has_Employees
-        WHERE concertID = :selectedConcert AND employeeID = :selectedEmployee
+        WHERE concertID = :selectedConcertID AND employeeID = :selectedEmployeeID
     )
  
 -- delete an artist from a concert
 DELETE FROM Artists WHERE
     (
         SELECT Artists.artistID FROM Concert_has_Artists
-        WHERE concertID = :selectedConcert AND artistID = :selectedArtist
+        WHERE concertID = :selectedConcertID AND artistID = :selectedArtistID
     )
-
