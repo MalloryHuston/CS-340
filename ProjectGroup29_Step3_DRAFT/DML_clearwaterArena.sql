@@ -33,7 +33,7 @@ SELECT Employees.employeeID, Employees.firstName, Employees.lastName, Employees.
 
 -- fans
 -- get all fans
-SELECT Fans.fanID, Fans.firstName, Fans.lastName, Fans.email, Fans.phoneNumber, Fans.streetAddress, Fans.city, Fans.state, Fans.zipCode, Fans.concertID FROM Fans;
+SELECT Fans.fanID, Fans.firstName, Fans.lastName, Fans.email, Fans.phoneNumber, Fans.streetAddress, Fans.city, Fans.state, Fans.zipCode FROM Fans;
 
 
 -- tickets
