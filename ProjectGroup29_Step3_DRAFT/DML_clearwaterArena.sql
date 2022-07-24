@@ -3,6 +3,7 @@
 -- Your submission should contain ALL the queries required to implement ALL the
 -- functionalities listed in the Project Specs.
 
+
 -- READ OPERATIONS
 -- artists
 -- get all artists
@@ -16,7 +17,6 @@ SELECT * FROM Employees;
 -- get all fans
 SELECT * FROM Fans;
 
-
 -- concerts_has_artists
 -- get all concerts_has_artists
 SELECT Concerts.concertID, Artists.artistID AS artist FROM Concerts
@@ -26,7 +26,6 @@ INNER JOIN Artists ON Concerts.concertID = Artists.artistID;
 -- get all concerts_has_employees
 SELECT Concerts.concertID, Employees.employeeID AS employee FROM Concerts
 INNER JOIN Employees ON Concerts.concertID = Employees.employeeID;
-
 
 -- concerts
 -- get all concerts and the corresponding artists and employees
@@ -41,6 +40,7 @@ SELECT Tickets.ticketID, Tickets.concertID, Artists.name AS artist FROM Tickets
 SELECT Tickets.ticketID, Tickets.fanID, Fans.firstName, Fans.lastName AS fan FROM Tickets
 INNER JOIN Artists ON Tickets.concertID = Artists.artistID
 INNER JOIN Fans ON Tickets.ticketID = Fans.fanID;
+
 
 -- CREATE OPERATIONS
 -- create a new Concert
@@ -61,6 +61,7 @@ INSERT INTO Fans (Fans.firstName, Fans.lastName, Fans.email, Fans.phoneNumber, F
 -- add a ticket to a Concert
 INSERT INTO Tickets (Tickets.concertID, Tickets.ticketID) VALUES (:concertIDInput, :ticketIDInput)
 
+
 -- UPDATE OPERATIONS
 -- update a fan
 UPDATE Fans
@@ -76,6 +77,7 @@ UPDATE Employees
 UPDATE Artists
     SET name = :nameInput, phoneNumber = :phoneNumberInput
     WHERE artistID = :selectedArtistID
+
 
 -- DELETE OPERATIONS
 -- delete a ticket from a concert
