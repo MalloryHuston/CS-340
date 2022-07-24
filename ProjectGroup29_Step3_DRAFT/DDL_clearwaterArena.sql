@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `Artists`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Artists` (
   `name` varchar(145) NOT NULL,
-  `artistID` int(11) NOT NULL,
+  `artistID` int(11) NOT NULL AUTO_INCREMENT,
   `phoneNumber` int(11) DEFAULT NULL,
   PRIMARY KEY (`artistID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
@@ -48,7 +48,7 @@ DROP TABLE IF EXISTS `Concerts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Concerts` (
-  `concertID` int(11) NOT NULL,
+  `concertID` int(11) NOT NULL AUTO_INCREMENT,
   `concertDate` date DEFAULT NULL,
   `numberOfTickets` int(11) DEFAULT NULL,
   PRIMARY KEY (`concertID`)
@@ -129,7 +129,7 @@ DROP TABLE IF EXISTS `Employees`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Employees` (
-  `employeeID` int(11) NOT NULL,
+  `employeeID` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(45) DEFAULT NULL,
   `lastName` varchar(45) DEFAULT NULL,
   `role` varchar(45) DEFAULT NULL,
@@ -157,7 +157,7 @@ DROP TABLE IF EXISTS `Fans`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Fans` (
-  `fanID` int(11) NOT NULL,
+  `fanID` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(45) DEFAULT NULL,
   `lastName` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
@@ -191,7 +191,7 @@ DROP TABLE IF EXISTS `Tickets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Tickets` (
-  `ticketID` int(11) NOT NULL,
+  `ticketID` int(11) NOT NULL AUTO_INCREMENT,
   `concertID` int(11) NOT NULL,
   `fanID` int(11) NOT NULL,
   PRIMARY KEY (`ticketID`,`concertID`,`fanID`),
