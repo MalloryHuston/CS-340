@@ -33,7 +33,7 @@ SELECT Employees.employeeID, Employees.firstName, Employees.lastName, Employees.
 
 -- fans
 -- get all fans
-SELECT Fans.fanID, Fans.firstName, Fans.lastName, Fans.email, Fans.phoneNumber, Fans.streetAddress, Fans.city, Fans.state, Fans.zipCode, Fans.concertID FROM Fans;
+SELECT Fans.fanID, Fans.firstName, Fans.lastName, Fans.email, Fans.phoneNumber, Fans.streetAddress, Fans.city, Fans.state, Fans.zipCode FROM Fans;
 
 
 -- tickets
@@ -47,7 +47,7 @@ INNER JOIN Concerts on Tickets.ticketID = Concerts.concertID;
 INSERT INTO Concerts (Concerts.concertDate, Concerts.numberOfTickets) VALUES (:concertDateInput, :numberOfTicketsInput);
 
 -- create a new Artist
-INSERT INTO Artists (Artists.name, Artists.artistID, Artists.phoneNumber) VALUES (:nameInput, :artistIDFromDropDown, :phoneNumberInput);
+INSERT INTO Artists (Artists.name, Artists.phoneNumber) VALUES (:nameInput, :phoneNumberInput);
 
 -- create a new Ticket
 INSERT INTO Tickets (Tickets.concertID, Tickets.fanID) VALUES (:concertIDInput, :fanIDInput);
@@ -56,7 +56,7 @@ INSERT INTO Tickets (Tickets.concertID, Tickets.fanID) VALUES (:concertIDInput, 
 INSERT INTO Employees (Employees.firstName, Employees.lastName, Employees.role, Employees.email, Employees.phoneNumber) VALUES (:firstNameInput, :lastNameInput, :roleFromDropDown, :emailInput, :phoneNumberInput);
 
 -- create a new Fan
-INSERT INTO Fans (Fans.firstName, Fans.lastName, Fans.email, Fans.phoneNumber, Fans.streetAddress, Fans.city, Fans.state, Fans.zipCode, Fans.concertID) VALUES (:firstNameInput, :lastNameInput, :emailInput, :phoneNumberInput, :streetAddressInput, :cityInput, :stateInput, :zipCodeInput, :concertIDFromDropDown);
+INSERT INTO Fans (Fans.firstName, Fans.lastName, Fans.email, Fans.phoneNumber, Fans.streetAddress, Fans.city, Fans.state, Fans.zipCode) VALUES (:firstNameInput, :lastNameInput, :emailInput, :phoneNumberInput, :streetAddressInput, :cityInput, :stateInput, :zipCodeInput);
 
 -- add a ticket to a Concert
 INSERT INTO Tickets (Tickets.concertID, Tickets.ticketID) VALUES (:concertIDInput, :ticketIDInput)
@@ -64,7 +64,7 @@ INSERT INTO Tickets (Tickets.concertID, Tickets.ticketID) VALUES (:concertIDInpu
 -- UPDATE OPERATIONS
 -- update a fan
 UPDATE Fans
-    SET firstName = :firstNameInput, lastName = :lastNameInput, email = :emailInput, streetAddress = :streetAddressInput, city = :cityInput, state = :stateInput, zipCode = :zipCodeInput, concertID = :concertIDInput
+    SET firstName = :firstNameInput, lastName = :lastNameInput, email = :emailInput, streetAddress = :streetAddressInput, city = :cityInput, state = :stateInput, zipCode = :zipCodeInput
     WHERE fanID = :selectedFanID
     
 -- UPDATE OPERATIONS
