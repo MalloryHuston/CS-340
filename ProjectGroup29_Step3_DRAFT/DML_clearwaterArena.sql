@@ -79,3 +79,4 @@ DELETE FROM Tickets WHERE
     (
         SELECT Concerts.concertID FROM Tickets
         WHERE concertID = :selectedConcert AND ticketID = :selectedTicket
+    )
