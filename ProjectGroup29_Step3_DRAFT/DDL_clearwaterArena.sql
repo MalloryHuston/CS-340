@@ -36,7 +36,6 @@ CREATE TABLE `Artists` (
 
 LOCK TABLES `Artists` WRITE;
 /*!40000 ALTER TABLE `Artists` DISABLE KEYS */;
-INSERT INTO `Artists` VALUES ('Taylor Swift',1,2147483647),('Justin Bieber',3,2147483647),('BTS',7,2147483647);
 /*!40000 ALTER TABLE `Artists` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +60,6 @@ CREATE TABLE `Concerts` (
 
 LOCK TABLES `Concerts` WRITE;
 /*!40000 ALTER TABLE `Concerts` DISABLE KEYS */;
-INSERT INTO `Concerts` VALUES (1,'2022-07-01',5000),(3,'2022-06-17',3891),(6,'2022-05-13',4276);
 /*!40000 ALTER TABLE `Concerts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +87,6 @@ CREATE TABLE `Concerts_has_Artists` (
 
 LOCK TABLES `Concerts_has_Artists` WRITE;
 /*!40000 ALTER TABLE `Concerts_has_Artists` DISABLE KEYS */;
-INSERT INTO `Concerts_has_Artists` VALUES (1,3),(3,7),(6,1);
 /*!40000 ALTER TABLE `Concerts_has_Artists` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,9 +114,9 @@ CREATE TABLE `Concerts_has_Employees` (
 
 LOCK TABLES `Concerts_has_Employees` WRITE;
 /*!40000 ALTER TABLE `Concerts_has_Employees` DISABLE KEYS */;
-INSERT INTO `Concerts_has_Employees` VALUES (1,6),(1,9),(3,1),(3,6),(6,1),(6,4);
 /*!40000 ALTER TABLE `Concerts_has_Employees` ENABLE KEYS */;
 UNLOCK TABLES;
+
 
 --
 -- Table structure for table `Employees`
@@ -145,7 +142,6 @@ CREATE TABLE `Employees` (
 
 LOCK TABLES `Employees` WRITE;
 /*!40000 ALTER TABLE `Employees` DISABLE KEYS */;
-INSERT INTO `Employees` VALUES (1,'Mike','Bailey','Security Officer','mbailey475@gmail.com',2147483647),(4,'Wanda','Sykes','Sound Engineer','wsykes1964@hotmail.com',2104920033),(6,'Harry','Styles','Ticket Vendor','hstyles1d@yahoo.com',2147483647),(9,'Lisa','Kudrow','Event Planner','lkudrow1994@outlook.com',2147483647);
 /*!40000 ALTER TABLE `Employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,10 +162,7 @@ CREATE TABLE `Fans` (
   `city` varchar(45) DEFAULT NULL,
   `state` varchar(45) DEFAULT NULL,
   `zipCode` int(11) DEFAULT NULL,
-  `concertID` int(11) NOT NULL,
-  PRIMARY KEY (`fanID`,`concertID`),
-  KEY `fk_Fans_Concerts1_idx` (`concertID`),
-  CONSTRAINT `fk_Fans_Concerts1` FOREIGN KEY (`concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE CASCADE ON UPDATE NO ACTION
+  PRIMARY KEY (`fanID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -179,7 +172,6 @@ CREATE TABLE `Fans` (
 
 LOCK TABLES `Fans` WRITE;
 /*!40000 ALTER TABLE `Fans` DISABLE KEYS */;
-INSERT INTO `Fans` VALUES (1,'Ryan','Reynolds','theryanreynolds@gmail.com',2147483647,'310 Gosling Way','Madison','WI',53558,1),(2,'Vanessa','Hudgens','vhudgens2005@yahoo.com',2147483647,'80 Pomegranate Street','Madison','WI',53701,3),(3,'Danny','DeVito','dannymyman@hotmail.com',2147483647,'2006 Sunshine Avenue','Green Bay','WI',54229,3),(4,'Betty','White','goldengirl1922@outlook.com',2147483647,'12 Rodgers Road','Green Bay','WI',54229,6);
 /*!40000 ALTER TABLE `Fans` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,7 +200,6 @@ CREATE TABLE `Tickets` (
 
 LOCK TABLES `Tickets` WRITE;
 /*!40000 ALTER TABLE `Tickets` DISABLE KEYS */;
-INSERT INTO `Tickets` VALUES (1,6,4),(2,6,1),(3,3,3),(4,3,4),(5,1,1),(6,1,3),(7,1,2),(8,3,1),(9,6,2),(10,1,4),(11,1,1);
 /*!40000 ALTER TABLE `Tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -221,4 +212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-17 11:50:08
+-- Dump completed on 2022-07-24 10:50:21
