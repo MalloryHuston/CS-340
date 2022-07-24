@@ -67,7 +67,6 @@ UPDATE Fans
     SET firstName = :firstNameInput, lastName = :lastNameInput, email = :emailInput, streetAddress = :streetAddressInput, city = :cityInput, state = :stateInput, zipCode = :zipCodeInput
     WHERE fanID = :selectedFanID
     
--- UPDATE OPERATIONS
 -- update an employee
 UPDATE Employees
     SET firstName = :firstNameInput, lastName = :lastNameInput, role = :roleInput, email = :emailInput, phoneNumber = :phoneNumberInput
@@ -85,3 +84,18 @@ DELETE FROM Tickets WHERE
         SELECT Tickets.concertID FROM Tickets
         WHERE concertID = :selectedConcert AND ticketID = :selectedTicket
     )
+
+-- delete an employee from a concert
+DELETE FROM Employees WHERE
+    (
+        SELECT Employees.employeeID FROM Concert_has_Employees
+        WHERE concertID = :selectedConcert AND employeeID = :selectedEmployee
+    )
+ 
+-- delete an artist from a concert
+DELETE FROM Artists WHERE
+    (
+        SELECT Artists.artistID FROM Concert_has_Artists
+        WHERE concertID = :selectedConcert AND artistID = :selectedArtist
+    )
+
