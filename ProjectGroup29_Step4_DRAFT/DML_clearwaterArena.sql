@@ -20,7 +20,7 @@ INSERT INTO Employees (Employees.firstName, Employees.lastName, Employees.role, 
 INSERT INTO Fans (Fans.firstName, Fans.lastName, Fans.email, Fans.phoneNumber, Fans.streetAddress, Fans.city, Fans.state, Fans.zipCode) VALUES (:firstNameInput, :lastNameInput, :emailInput, :phoneNumberInput, :streetAddressInput, :cityInput, :stateInput, :zipCodeInput);
 
 -- add a ticket to a Concert
-INSERT INTO Tickets (Tickets.concertID, Tickets.ticketID) VALUES (:concertIDInput, :ticketIDInput)
+INSERT INTO Tickets (Tickets.concertID, Tickets.ticketID) VALUES (:concertInput, :ticketInput)
 
 
 -- READ OPERATIONS
@@ -36,29 +36,21 @@ SELECT * FROM Employees;
 -- get all fans
 SELECT * FROM Fans;
 
--- concerts_has_artists
--- get all concerts_has_artists
-SELECT Concerts.concertID, Artists.artistID AS artist FROM Concerts
-INNER JOIN Artists ON Concerts.concertID = Artists.artistID;
-
--- concerts_has_employees
--- get all concerts_has_employees
-SELECT Concerts.concertID, Employees.employeeID AS employee FROM Concerts
-INNER JOIN Employees ON Concerts.concertID = Employees.employeeID;
-
 -- concerts
 -- get all concerts and the corresponding artists and employees
-SELECT Concerts.concertID, Concerts.concertDate, Concerts.numberOfTickets, Artists.name AS artist FROM Concerts
-SELECT Concerts.concertID, Concerts.concertDate, Concerts.numberOfTickets, Employees.firstName, Employees.lastName AS employee FROM Concerts
-INNER JOIN Artists ON Concerts.concertID = Artists.artistID
-INNER JOIN Employees ON Concerts.concertID = Employees.employeeID;
+SELECT Concerts.concertID, Concerts.concertDate, Concerts.numberOfTickets, Artists.artistID, Artists.name AS artist FROM Concerts_has_Artists
+SELECT Concerts.concertID, Concerts.concertDate, Concerts.numberOfTickets, Employees.employeeID, Employees.firstName, Employees.lastName AS employee FROM Concerts_has_Employees
+INNER JOIN Artists ON Concerts_has_Artists.artistID = Artists.artistID
+INNER JOIN Concerts ON Concerts_has_Artists.concertID = Concerts.concertID
+INNER JOIN Employees ON Concerts_has_Employees.employeeID = Employees.employeeID
+INNER JOIN Concerts ON Concerts_has_Employees.concertID = Concerts.concertID;
 
 -- tickets
 -- get all tickets and the corresponding artists and fans
-SELECT Tickets.ticketID, Tickets.concertID, Artists.name AS artist FROM Tickets
-SELECT Tickets.ticketID, Tickets.fanID, Fans.firstName, Fans.lastName AS fan FROM Tickets
-INNER JOIN Artists ON Tickets.concertID = Artists.artistID
-INNER JOIN Fans ON Tickets.ticketID = Fans.fanID;
+SELECT Tickets.ticketID, Tickets.concertID, Artists.artistID, Artists.name AS artist FROM Tickets
+SELECT Tickets.ticketID, Tickets.fanID, Fans.fanID, Fans.firstName, Fans.lastName AS fan FROM Tickets
+INNER JOIN Artists ON Concerts_has_Artists.artistID = Artists.artistID
+INNER JOIN Fans ON Tickets.fanID = Fans.fanID;
 
 
 -- UPDATE OPERATIONS
@@ -83,19 +75,19 @@ UPDATE Artists
 DELETE FROM Tickets WHERE
     (
         SELECT Tickets.concertID FROM Tickets
-        WHERE concertID = :selectedConcertID AND ticketID = :selectedTicketID
+        WHERE concertID = :selectedConcert AND ticketID = :selectedTicket
     )
 
 -- delete an employee from a concert
-DELETE FROM Employees WHERE
+DELETE FROM Concerts_has_Employees WHERE
     (
-        SELECT Employees.employeeID FROM Concert_has_Employees
-        WHERE concertID = :selectedConcertID AND employeeID = :selectedEmployeeID
+        SELECT Employees.employeeID FROM Concerts_has_Employees
+        WHERE concertID = :selectedConcert AND employeeID = :selectedEmployee
     )
  
 -- delete an artist from a concert
-DELETE FROM Artists WHERE
+DELETE FROM Concerts_has_Artists WHERE
     (
-        SELECT Artists.artistID FROM Concert_has_Artists
-        WHERE concertID = :selectedConcertID AND artistID = :selectedArtistID
+        SELECT Artists.artistID FROM Concerts_has_Artists
+        WHERE concertID = :selectedConcert AND artistID = :selectedArtist
     )
