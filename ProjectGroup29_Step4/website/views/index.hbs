@@ -1,0 +1,89 @@
+<!-- index.hbs -->
+
+<h1>Clearwater Arena</h1>
+
+
+{{!-- Create a table --}}
+<table id="employee-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, firstName, lastName, role, email, and phone numberin order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.employeeID}}</td>
+            <td>{{this.firstName}}</td>
+            <td>{{this.lastName}}</td>
+            <td>{{this.role}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.phoneNumber}}</td>
+            <td><button onclick="deleteEmployee({{this.employeeID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="../public/js/delete_employee.js"></script>
+
+
+{{!-- Form to add a record to the table  --}}
+<h2>Adding Data</h2>
+<p>To add a new employee, please enter their information below and click 'Submit'!</p>
+<form id="add-employee-form" method="POST" action="/add-employee-form">
+    <label for="input-firstName">First Name: </label>
+    <input type="text" name="input-firstName" id="input-firstName">
+    
+    <label for="input-lastName">Last Name: </label>
+    <input type="text" name="input-lastName" id="input-lastName">
+
+    <label for="input-role">Role: </label>
+    <input type="text" name="input-role" id="input-role">
+
+    <label for="input-email">Email: </label>
+    <input type="text" name="input-email" id="input-email">
+
+    <label for="input-phoneNumber">Phone Number: </label>
+    <input type="text" name="input-phoneNumber" id="input-phoneNumber">
+
+    <input type="submit">
+</form>
+
+<h2>Updating Employee</h2>
+<p>Select employee's name to update their role</p>
+<form id="update-employee-form-ajax">
+
+    <label for="input-fullname">Full name: </label>
+    <select name="input-fullname" id="mySelect">
+        <option value="test">Select an employee</option>
+        {{#each data}}
+        <option value="{{this.employeeID}}">{{this.firstName}} {{this.lastName}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-role">Role: </label>
+    <select name="input-role" id="input-role-update">
+        <option>Select a Role</option>
+        {{#each data}}
+        <option value="{{this.employeeID}}">{{this.role}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">
+
+</form>
+
+<script src="../public/js/update_employee.js"></script>
