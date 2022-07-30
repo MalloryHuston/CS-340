@@ -37,22 +37,19 @@ SELECT * FROM Employees;
 SELECT * FROM Fans;
 
 -- concerts
--- get all concerts
-SELECT * FROM Concerts;
+-- get all concerts and all artists within the concert
+SELECT Concerts.concertID, Concerts.concertDate, Concerts.numberOfTickets, Artists.name FROM Concerts
+INNER JOIN Concerts_has_Artists on Concerts_has_Artists.concertID = Concerts.concertID
+INNER JOIN Artists on Concerts_has_Artists.artistID = Artists.artistID
 
--- concerts_has_artists
--- get all concerts and the corresponding artists and employees
-SELECT Concerts.concertID, Artists.artistID AS artist from Concerts
-INNER JOIN Artists ON 
-SELECT Concerts.concertID, Concerts.concertDate, Concerts.numberOfTickets, Artists.artistID, Artists.name AS artist FROM Concerts_has_Artists
-SELECT Concerts.concertID, Concerts.concertDate, Concerts.numberOfTickets, Employees.employeeID, Employees.firstName, Employees.lastName AS employee FROM Concerts_has_Employees
-INNER JOIN Artists ON Concerts_has_Artists.artistID = Artists.artistID
-INNER JOIN Concerts ON Concerts_has_Artists.concertID = Concerts.concertID
-INNER JOIN Employees ON Concerts_has_Employees.employeeID = Employees.employeeID
-INNER JOIN Concerts ON Concerts_has_Employees.concertID = Concerts.concertID;
+-- concerts
+-- get all concerts and all employees within the concert
+SELECT Concerts.concertID, Concerts.concertDate, Concerts.numberOfTickets, Employees.firstName, Employees.lastName FROM Concerts
+INNER JOIN Concerts_has_Employees on Concerts_has_Employees.concertID = Concerts.concertID
+INNER JOIN Employees on Concerts_has_Employees.employeeID = Employees.employeeID
 
 -- tickets
--- get all tickets and the corresponding concerts and fans
+-- get all tickets and all corresponding concerts and fans
 SELECT Tickets.ticketID, Tickets.concertID, Concerts.concertID, Concerts.concertDate, Concerts.numberOfTickets AS concert FROM Tickets
 SELECT Tickets.ticketID, Tickets.fanID, Fans.fanID, Fans.firstName, Fans.lastName AS fan FROM Tickets
 INNER JOIN Concerts ON Tickets.concertID = Concerts.concertID
