@@ -59,7 +59,7 @@ INNER JOIN Concerts ON Tickets.concertID = Concerts.concertID
 INNER JOIN Fans ON Tickets.fanID = Fans.fanID;
 
 -- filter by artist name
-SELECT Artists.name, Concerts.concertDate, Concerts.numberOfTickets FROM Customers_has_Artists
+SELECT Artists.name, Concerts.concertDate, Concerts.numberOfTickets FROM Concerts_has_Artists
 WHERE Artists.name = :artistnamefilter;
 
 
