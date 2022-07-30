@@ -86,15 +86,13 @@ DELETE FROM Tickets WHERE
     )
 
 -- delete an employee from a concert
-DELETE FROM Concerts_has_Employees WHERE
-    (
-        SELECT Employees.employeeID FROM Concerts_has_Employees
-        WHERE concertID = :selectedConcert AND employeeID = :selectedEmployee
-    )
+DELETE FROM Concerts_has_Employees WHERE concertID = :selectedConcert AND employeeID = :selectedEmployee;
  
 -- delete an artist from a concert
-DELETE FROM Concerts_has_Artists WHERE
-    (
-        SELECT Artists.artistID FROM Concerts_has_Artists
-        WHERE concertID = :selectedConcert AND artistID = :selectedArtist
-    )
+DELETE FROM Concerts_has_Artists WHERE concertID = :selectedConcert AND artistID = :selectedArtist;
+
+-- set a fan in a ticket to be null
+UPDATE Tickets
+    SET Tickets.fanID = NULL
+    WHERE Tickets.ticketID = :selectedTicketID
+
