@@ -27,7 +27,7 @@ INNER JOIN Employees on Concerts_has_Employees.employeeID = Employees.employeeID
 -- get all tickets and all corresponding concerts and fans
 SELECT Tickets.ticketID, Tickets.concertID, Concerts.concertID, Concerts.concertDate, Concerts.numberOfTickets AS concert FROM Tickets
 SELECT Tickets.ticketID, Tickets.fanID, Fans.fanID, Fans.firstName, Fans.lastName AS fan FROM Tickets
-INNER JOIN Concerts ON Tickets.concertID = Concerts.concertID;
+INNER JOIN Concerts ON Tickets.concertID = Concerts.concertID
 INNER JOIN Fans ON Tickets.fanID = Fans.fanID;
 
 -- filter by artist name
@@ -62,7 +62,7 @@ INSERT INTO Concerts_has_Employees (Concerts_has_Employees.concertID, Concerts_h
 -- update a fan
 UPDATE Fans
     SET firstName = :firstNameInput, lastName = :lastNameInput, email = :emailInput, streetAddress = :streetAddressInput, city = :cityInput, state = :stateInput, zipCode = :zipCodeInput
-    WHERE fanID = :selectedFanID
+    WHERE fanID = :selectedFanID;
     
 -- update an employee
 UPDATE Employees
@@ -92,5 +92,5 @@ DELETE FROM Concerts_has_Artists WHERE concertID = :selectedConcert AND artistID
 -- set a fan in a ticket to be null
 UPDATE Tickets
     SET Tickets.fanID = NULL
-    WHERE Tickets.ticketID = :selectedTicketID
+    WHERE Tickets.ticketID = :selectedTicketID;
 
