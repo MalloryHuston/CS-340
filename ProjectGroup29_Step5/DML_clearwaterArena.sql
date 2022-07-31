@@ -1,28 +1,3 @@
--- These are some Database Manipulation queries for a partially implemented Project Website 
--- using the Clearwater Arena database.
--- Your submission should contain ALL the queries required to implement ALL the
--- functionalities listed in the Project Specs.
-
--- CREATE OPERATIONS
--- create a new Concert
-INSERT INTO Concerts (Concerts.concertDate, Concerts.numberOfTickets) VALUES (:concertDateInput, :numberOfTicketsInput);
-
--- create a new Artist
-INSERT INTO Artists (Artists.name, Artists.phoneNumber) VALUES (:nameInput, :phoneNumberInput);
-
--- create a new Ticket
-INSERT INTO Tickets (Tickets.concertID, Tickets.fanID) VALUES (:concertIDFromDropDown, :fanIDFromDropDown);
-
--- create a new Employee
-INSERT INTO Employees (Employees.firstName, Employees.lastName, Employees.role, Employees.email, Employees.phoneNumber) VALUES (:firstNameInput, :lastNameInput, :roleInput, :emailInput, :phoneNumberInput);
-
--- create a new Fan
-INSERT INTO Fans (Fans.firstName, Fans.lastName, Fans.email, Fans.phoneNumber, Fans.streetAddress, Fans.city, Fans.state, Fans.zipCode) VALUES (:firstNameInput, :lastNameInput, :emailInput, :phoneNumberInput, :streetAddressInput, :cityInput, :stateInput, :zipCodeInput);
-
--- add a ticket to a Concert
-INSERT INTO Tickets (Tickets.concertID, Tickets.ticketID) VALUES (:concertInput, :ticketInput)
-
-
 -- READ OPERATIONS
 -- artists
 -- get all artists
@@ -58,6 +33,26 @@ INNER JOIN Fans ON Tickets.fanID = Fans.fanID;
 -- filter by artist name
 SELECT Artists.name, Concerts.concertDate, Concerts.numberOfTickets FROM Concerts_has_Artists
 WHERE Artists.name = :artistnamefilter;
+
+
+-- CREATE OPERATIONS
+-- create a new Concert
+INSERT INTO Concerts (Concerts.concertDate, Concerts.numberOfTickets) VALUES (:concertDateInput, :numberOfTicketsInput);
+
+-- create a new Artist
+INSERT INTO Artists (Artists.name, Artists.phoneNumber) VALUES (:nameInput, :phoneNumberInput);
+
+-- create a new Ticket
+INSERT INTO Tickets (Tickets.concertID, Tickets.fanID) VALUES (:concertIDFromDropDown, :fanIDFromDropDown);
+
+-- create a new Employee
+INSERT INTO Employees (Employees.firstName, Employees.lastName, Employees.role, Employees.email, Employees.phoneNumber) VALUES (:firstNameInput, :lastNameInput, :roleInput, :emailInput, :phoneNumberInput);
+
+-- create a new Fan
+INSERT INTO Fans (Fans.firstName, Fans.lastName, Fans.email, Fans.phoneNumber, Fans.streetAddress, Fans.city, Fans.state, Fans.zipCode) VALUES (:firstNameInput, :lastNameInput, :emailInput, :phoneNumberInput, :streetAddressInput, :cityInput, :stateInput, :zipCodeInput);
+
+-- add a ticket to a Concert
+INSERT INTO Tickets (Tickets.concertID, Tickets.ticketID) VALUES (:concertInput, :ticketInput)
 
 
 -- UPDATE OPERATIONS
