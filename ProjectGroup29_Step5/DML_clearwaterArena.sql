@@ -1,4 +1,8 @@
 -- READ OPERATIONS
+-- ticket_types
+-- get all types of tickets
+SELECT Ticket_Types.ticket_typeID FROM Ticket_Types;
+
 -- artists
 -- get all artists
 SELECT * FROM Artists;
