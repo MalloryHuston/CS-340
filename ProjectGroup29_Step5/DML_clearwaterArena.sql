@@ -25,7 +25,7 @@ INNER JOIN Employees on Concerts_has_Employees.employeeID = Employees.employeeID
 
 -- tickets
 -- get all tickets and all corresponding concerts and fans
-SELECT Tickets.ticketID, Concerts.concertDate AS concert, Fans.fanID AS fan FROM Tickets
+SELECT Tickets.ticketID, Concerts.concertDate AS concert, Fans.email AS fan FROM Tickets
 INNER JOIN Concerts ON Concerts.concertID = Tickets.concertID
 INNER JOIN Fans ON Fans.fanID = Tickets.fanID;
 
