@@ -43,7 +43,7 @@ INSERT INTO Concerts (Concerts.concertDate, Concerts.numberOfTickets) VALUES (:c
 INSERT INTO Artists (Artists.name, Artists.phoneNumber) VALUES (:nameInput, :phoneNumberInput);
 
 -- create a new Ticket
-INSERT INTO Tickets (Tickets.concertID, Tickets.fanID) VALUES (:concertIDFromDropDown, :fanIDFromDropDown);
+INSERT INTO Tickets (Tickets.duration, Tickets.isVIP, Tickets.concertID, Tickets.fanID, Tickets.ticket_typeID) VALUES (:durationInput, :isVIPInput, :concertIDFromDropDown, :fanIDFromDropDown, :ticket_typeIDFromDropDown);
 
 -- create a new Employee
 INSERT INTO Employees (Employees.firstName, Employees.lastName, Employees.role, Employees.email, Employees.phoneNumber) VALUES (:firstNameInput, :lastNameInput, :roleInput, :emailInput, :phoneNumberInput);
@@ -89,8 +89,8 @@ DELETE FROM Concerts_has_Employees WHERE concertID = :selectedConcert AND employ
 -- delete an artist from a concert
 DELETE FROM Concerts_has_Artists WHERE concertID = :selectedConcert AND artistID = :selectedArtist;
 
--- set a fan in a ticket to be null
+-- set a category in a ticket to be null
 UPDATE Tickets
-    SET Tickets.fanID = NULL
+    SET Tickets.ticket_typeID = NULL
     WHERE Tickets.ticketID = :selectedTicketID;
 
