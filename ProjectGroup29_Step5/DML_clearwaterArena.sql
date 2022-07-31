@@ -83,13 +83,6 @@ UPDATE Artists
 
 
 -- DELETE OPERATIONS
--- delete a ticket from a concert
-DELETE FROM Tickets WHERE
-    (
-        SELECT Tickets.concertID FROM Tickets
-        WHERE concertID = :selectedConcert AND ticketID = :selectedTicket;
-    )
-
 -- delete an employee from a concert
 DELETE FROM Concerts_has_Employees WHERE concertID = :selectedConcert AND employeeID = :selectedEmployee;
  
