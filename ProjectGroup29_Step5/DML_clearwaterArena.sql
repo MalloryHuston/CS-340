@@ -24,10 +24,11 @@ INNER JOIN Concerts_has_Employees on Concerts_has_Employees.concertID = Concerts
 INNER JOIN Employees on Concerts_has_Employees.employeeID = Employees.employeeID;
 
 -- tickets
--- get all tickets and all corresponding concerts and fans
-SELECT Tickets.ticketID, Concerts.concertDate AS concert, Fans.email AS fan FROM Tickets
+-- get all tickets and the corresponding concert, fan, and type of ticket
+SELECT Tickets.ticketID, Tickets.duration, Tickets.isVIP, Concerts.concertDate AS concert, Fans.email AS fan, Ticket_Types.ticket_typeID AS type FROM Tickets
 INNER JOIN Concerts ON Concerts.concertID = Tickets.concertID
-INNER JOIN Fans ON Fans.fanID = Tickets.fanID;
+INNER JOIN Fans ON Fans.fanID = Tickets.fanID
+INNER JOIN Ticket_Types ON Ticket_Types.ticket_typeID = Tickets.ticket_typeID;
 
 -- filter by artist name
 SELECT Artists.name, Concerts.concertDate, Concerts.numberOfTickets FROM Concerts_has_Artists
