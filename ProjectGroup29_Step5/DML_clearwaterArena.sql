@@ -40,6 +40,9 @@ WHERE Artists.name = :artistnamefilter;
 
 
 -- CREATE OPERATIONS
+-- create a new type of Ticket
+INSERT INTO Ticket_Types (Ticket_Types.ticket_typeID) VALUES (:ticket_typeIDInput);
+
 -- create a new Concert
 INSERT INTO Concerts (Concerts.concertDate, Concerts.numberOfTickets) VALUES (:concertDateInput, :numberOfTicketsInput);
 
