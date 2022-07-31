@@ -29,7 +29,7 @@ INNER JOIN Employees on Concerts_has_Employees.employeeID = Employees.employeeID
 
 -- tickets
 -- get all tickets and the corresponding concert, fan, and type of ticket
-SELECT Tickets.ticketID, Tickets.duration, Tickets.isVIP, Concerts.concertDate AS concert, Fans.email AS fan, Ticket_Types.ticket_typeID AS type FROM Tickets
+SELECT Tickets.ticketID, Tickets.duration, Concerts.concertDate AS concert, Fans.email AS fan, Ticket_Types.ticket_typeID AS type FROM Tickets
 INNER JOIN Concerts ON Concerts.concertID = Tickets.concertID
 INNER JOIN Fans ON Fans.fanID = Tickets.fanID
 INNER JOIN Ticket_Types ON Ticket_Types.ticket_typeID = Tickets.ticket_typeID;
@@ -50,7 +50,7 @@ INSERT INTO Concerts (Concerts.concertDate, Concerts.numberOfTickets) VALUES (:c
 INSERT INTO Artists (Artists.name, Artists.phoneNumber) VALUES (:nameInput, :phoneNumberInput);
 
 -- create a new Ticket
-INSERT INTO Tickets (Tickets.duration, Tickets.isVIP, Tickets.concertID, Tickets.fanID, Tickets.ticket_typeID) VALUES (:durationInput, :isVIPInput, :concertIDFromDropDown, :fanIDFromDropDown, :ticket_typeIDFromDropDown);
+INSERT INTO Tickets (Tickets.duration, Tickets.concertID, Tickets.fanID, Tickets.ticket_typeID) VALUES (:durationInput, :concertIDFromDropDown, :fanIDFromDropDown, :ticket_typeIDFromDropDown);
 
 -- create a new Employee
 INSERT INTO Employees (Employees.firstName, Employees.lastName, Employees.role, Employees.email, Employees.phoneNumber) VALUES (:firstNameInput, :lastNameInput, :roleInput, :emailInput, :phoneNumberInput);
