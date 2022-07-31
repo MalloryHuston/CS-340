@@ -51,8 +51,11 @@ INSERT INTO Employees (Employees.firstName, Employees.lastName, Employees.role, 
 -- create a new Fan
 INSERT INTO Fans (Fans.firstName, Fans.lastName, Fans.email, Fans.phoneNumber, Fans.streetAddress, Fans.city, Fans.state, Fans.zipCode) VALUES (:firstNameInput, :lastNameInput, :emailInput, :phoneNumberInput, :streetAddressInput, :cityInput, :stateInput, :zipCodeInput);
 
--- add a ticket to a Concert
-INSERT INTO Tickets (Tickets.concertID, Tickets.ticketID) VALUES (:concertInput, :ticketInput)
+-- add an artist to a Concert
+INSERT INTO Concerts_has_Artists (Concerts_has_Artists.concertID, Concerts_has_Artists.artistID) VALUES (:concertInput, :artistInput)
+
+-- add an employee to a Concert
+INSERT INTO Concerts_has_Employees (Concerts_has_Employees.concertID, Concerts_has_Employees.employeeID) VALUES (:concertInput, :employeeInput)
 
 
 -- UPDATE OPERATIONS
