@@ -70,16 +70,6 @@ INSERT INTO Concerts_has_Employees (Concerts_has_Employees.concertID, Concerts_h
 UPDATE Fans
     SET firstName = :firstNameInput, lastName = :lastNameInput, email = :emailInput, streetAddress = :streetAddressInput, city = :cityInput, state = :stateInput, zipCode = :zipCodeInput
     WHERE fanID = :selectedFanID;
-    
--- update an employee
-UPDATE Employees
-    SET firstName = :firstNameInput, lastName = :lastNameInput, role = :roleInput, email = :emailInput, phoneNumber = :phoneNumberInput
-    WHERE employeeID = :selectedEmployeeID;
-    
--- update an artist
-UPDATE Artists
-    SET name = :nameInput, phoneNumber = :phoneNumberInput
-    WHERE artistID = :selectedArtistID;
 
 
 -- DELETE OPERATIONS
