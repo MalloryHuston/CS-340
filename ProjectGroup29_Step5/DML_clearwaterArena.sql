@@ -16,14 +16,10 @@ SELECT * FROM Employees;
 SELECT * FROM Fans;
 
 -- concerts
--- get all concerts and all artists within the concert
-SELECT Concerts.concertID, Concerts.concertDate, Concerts.numberOfTickets, Artists.name AS artist FROM Concerts
+-- get all concerts and all artists and employees within the concert
+SELECT Concerts.concertID, Concerts.concertDate, Concerts.numberOfTickets, Artists.name AS artist, Employees.lastName FROM Concerts
 INNER JOIN Concerts_has_Artists on Concerts_has_Artists.concertID = Concerts.concertID
-INNER JOIN Artists on Concerts_has_Artists.artistID = Artists.artistID;
-
--- concerts
--- get all concerts and all employees within the concert
-SELECT Concerts.concertID, Concerts.concertDate, Concerts.numberOfTickets, Employees.lastName AS employee FROM Concerts
+INNER JOIN Artists on Concerts_has_Artists.artistID = Artists.artistID
 INNER JOIN Concerts_has_Employees on Concerts_has_Employees.concertID = Concerts.concertID
 INNER JOIN Employees on Concerts_has_Employees.employeeID = Employees.employeeID;
 
