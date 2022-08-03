@@ -11,14 +11,7 @@ import os
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'classmysql.engr.oregonstate.edu'
-app.config['MYSQL_USER'] = 'cs340_diagours'
-app.config['MYSQL_PASSWORD'] = '9303' #last 4 of onid
-app.config['MYSQL_DB'] = 'cs340_diagours'
-app.config['MYSQL_CURSORCLASS'] = "DictCursor"
-
-
-mysql = MySQL(app)
+db_connection = db.connect_to_database()
 
 
 # Routes
