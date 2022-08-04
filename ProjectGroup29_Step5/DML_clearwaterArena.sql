@@ -18,10 +18,10 @@ SELECT * FROM Fans;
 -- concerts
 -- get all concerts and all artists and employees within the concert
 SELECT Concerts.concertID, Concerts.concertDate, Concerts.numberOfTickets, Artists.name AS artist, Employees.lastName FROM Concerts
-INNER JOIN Concerts_has_Artists on Concerts_has_Artists.concertID = Concerts.concertID
-INNER JOIN Artists on Concerts_has_Artists.artistID = Artists.artistID
-INNER JOIN Concerts_has_Employees on Concerts_has_Employees.concertID = Concerts.concertID
-INNER JOIN Employees on Concerts_has_Employees.employeeID = Employees.employeeID;
+INNER JOIN Concerts_Artists on Concerts_Artists.concertID = Concerts.concertID
+INNER JOIN Artists on Concerts_Artists.artistID = Artists.artistID
+INNER JOIN Concerts_Employees on Concerts_Employees.concertID = Concerts.concertID
+INNER JOIN Employees on Concerts_Employees.employeeID = Employees.employeeID;
 
 -- tickets
 -- get all tickets and the corresponding concert, fan, and type of ticket
@@ -31,7 +31,7 @@ INNER JOIN Fans ON Fans.fanID = Tickets.fanID
 INNER JOIN Ticket_Types ON Ticket_Types.ticket_typeID = Tickets.ticket_typeID;
 
 -- filter by artist name
-SELECT Artists.name, Concerts.concertDate, Concerts.numberOfTickets FROM Concerts_has_Artists
+SELECT Artists.name, Concerts.concertDate, Concerts.numberOfTickets FROM Concerts_Artists
 WHERE Artists.name = :artistnamefilter;
 
 
@@ -55,10 +55,10 @@ INSERT INTO Employees (Employees.firstName, Employees.lastName, Employees.role, 
 INSERT INTO Fans (Fans.firstName, Fans.lastName, Fans.email, Fans.phoneNumber, Fans.streetAddress, Fans.city, Fans.state, Fans.zipCode) VALUES (:firstNameInput, :lastNameInput, :emailInput, :phoneNumberInput, :streetAddressInput, :cityInput, :stateInput, :zipCodeInput);
 
 -- add an artist to a Concert
-INSERT INTO Concerts_has_Artists (Concerts_has_Artists.concertID, Concerts_has_Artists.artistID) VALUES (:concertInput, :artistInput);
+INSERT INTO Concerts_Artists (Concerts_Artists.concertID, Concerts_Artists.artistID) VALUES (:concertInput, :artistInput);
 
 -- add an employee to a Concert
-INSERT INTO Concerts_has_Employees (Concerts_has_Employees.concertID, Concerts_has_Employees.employeeID) VALUES (:concertInput, :employeeInput);
+INSERT INTO Concerts_Employees (Concerts_Employees.concertID, Concerts_Employees.employeeID) VALUES (:concertInput, :employeeInput);
 
 
 -- UPDATE OPERATIONS
@@ -70,12 +70,12 @@ UPDATE Fans
 
 -- DELETE OPERATIONS
 -- delete an employee from a concert
-DELETE FROM Concerts_has_Employees WHERE concertID = :selectedConcert AND employeeID = :selectedEmployee;
+DELETE FROM Concerts_Employees WHERE concertID = :selectedConcert AND employeeID = :selectedEmployee;
  
 -- delete an artist from a concert
-DELETE FROM Concerts_has_Artists WHERE concertID = :selectedConcert AND artistID = :selectedArtist;
+DELETE FROM Concerts_Artists WHERE concertID = :selectedConcert AND artistID = :selectedArtist;
 
--- delete an entire concert from the Concerts table, all associated entries in both the Concerts_has_Artists and Concerts_has_Employees tables should be deleted by CASCADE
+-- delete an entire concert from the Concerts table, all associated entries in both the Concerts_Artists and Concerts_Employees tables should be deleted by CASCADE
 DELETE FROM Concerts
 WHERE concertID = :selectedConcertID;
 
