@@ -1,4 +1,4 @@
--- MariaDB dump 10.19  Distrib 10.6.8-MariaDB, for Linux (x86_64)
+-- MariaDB dump 10.19  Distrib 10.4.25-MariaDB, for Linux (x86_64)
 --
 -- Host: classmysql.engr.oregonstate.edu    Database: cs340_hustonm
 -- ------------------------------------------------------
@@ -68,63 +68,61 @@ INSERT INTO `Concerts` VALUES (1,'2022-07-01',5000),(2,'2022-06-17',3891),(3,'20
 UNLOCK TABLES;
 
 --
--- Table structure for table `Concerts_has_Artists`
+-- Table structure for table `Concerts_Artists`
 --
 
-DROP TABLE IF EXISTS `Concerts_has_Artists`;
+DROP TABLE IF EXISTS `Concerts_Artists`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Concerts_has_Artists` (
+CREATE TABLE `Concerts_Artists` (
   `concert_artistID` int(11) NOT NULL AUTO_INCREMENT,
-  `concertID` int(11) NOT NULL,
   `artistID` int(11) NOT NULL,
+  `concertID` int(11) NOT NULL,
   PRIMARY KEY (`concert_artistID`),
   UNIQUE KEY `concert_artistID_UNIQUE` (`concert_artistID`),
-  KEY `fk_Concerts_has_Artists_Artists1_idx` (`artistID`),
-  KEY `fk_Concerts_has_Artists_Concerts1_idx` (`concertID`),
-  CONSTRAINT `fk_Concerts_has_Artists_Artists1` FOREIGN KEY (`artistID`) REFERENCES `Artists` (`artistID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_Concerts_has_Artists_Concerts1` FOREIGN KEY (`concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+  KEY `fk_Artists_has_Concerts_Concerts1_idx` (`concertID`),
+  KEY `fk_Artists_has_Concerts_Artists1_idx` (`artistID`),
+  CONSTRAINT `fk_Artists_has_Concerts_Artists1` FOREIGN KEY (`artistID`) REFERENCES `Artists` (`artistID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_Artists_has_Concerts_Concerts1` FOREIGN KEY (`concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Concerts_has_Artists`
+-- Dumping data for table `Concerts_Artists`
 --
 
-LOCK TABLES `Concerts_has_Artists` WRITE;
-/*!40000 ALTER TABLE `Concerts_has_Artists` DISABLE KEYS */;
-INSERT INTO `Concerts_has_Artists` VALUES (1,1,4),(2,1,3),(3,2,1),(4,2,2),(5,3,3),(6,3,1),(7,4,4),(8,4,2);
-/*!40000 ALTER TABLE `Concerts_has_Artists` ENABLE KEYS */;
+LOCK TABLES `Concerts_Artists` WRITE;
+/*!40000 ALTER TABLE `Concerts_Artists` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Concerts_Artists` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Concerts_has_Employees`
+-- Table structure for table `Concerts_Employees`
 --
 
-DROP TABLE IF EXISTS `Concerts_has_Employees`;
+DROP TABLE IF EXISTS `Concerts_Employees`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Concerts_has_Employees` (
+CREATE TABLE `Concerts_Employees` (
   `concert_employeeID` int(11) NOT NULL AUTO_INCREMENT,
-  `concertID` int(11) NOT NULL,
   `employeeID` int(11) NOT NULL,
+  `concertID` int(11) NOT NULL,
   PRIMARY KEY (`concert_employeeID`),
   UNIQUE KEY `concert_employeeID_UNIQUE` (`concert_employeeID`),
-  KEY `fk_Concerts_has_Employees_Employees1_idx` (`employeeID`),
-  KEY `fk_Concerts_has_Employees_Concerts1_idx` (`concertID`),
-  CONSTRAINT `fk_Concerts_has_Employees_Concerts1` FOREIGN KEY (`concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_Concerts_has_Employees_Employees1` FOREIGN KEY (`employeeID`) REFERENCES `Employees` (`employeeID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+  KEY `fk_Employees_has_Concerts_Concerts1_idx` (`concertID`),
+  KEY `fk_Employees_has_Concerts_Employees1_idx` (`employeeID`),
+  CONSTRAINT `fk_Employees_has_Concerts_Concerts1` FOREIGN KEY (`concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_Employees_has_Concerts_Employees1` FOREIGN KEY (`employeeID`) REFERENCES `Employees` (`employeeID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Concerts_has_Employees`
+-- Dumping data for table `Concerts_Employees`
 --
 
-LOCK TABLES `Concerts_has_Employees` WRITE;
-/*!40000 ALTER TABLE `Concerts_has_Employees` DISABLE KEYS */;
-INSERT INTO `Concerts_has_Employees` VALUES (1,1,4),(2,1,3),(3,2,1),(4,2,2),(5,3,3),(6,3,1),(7,4,4),(8,4,2);
-/*!40000 ALTER TABLE `Concerts_has_Employees` ENABLE KEYS */;
+LOCK TABLES `Concerts_Employees` WRITE;
+/*!40000 ALTER TABLE `Concerts_Employees` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Concerts_Employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -233,7 +231,7 @@ CREATE TABLE `Tickets` (
   CONSTRAINT `fk_Tickets_Concerts1` FOREIGN KEY (`concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_Tickets_Fans1` FOREIGN KEY (`fanID`) REFERENCES `Fans` (`fanID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_Tickets_Ticket_Types1` FOREIGN KEY (`ticket_typeID`) REFERENCES `Ticket_Types` (`ticket_typeID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,7 +240,7 @@ CREATE TABLE `Tickets` (
 
 LOCK TABLES `Tickets` WRITE;
 /*!40000 ALTER TABLE `Tickets` DISABLE KEYS */;
-INSERT INTO `Tickets` VALUES (2,120,2,1,'Reserved Seating'),(3,180,4,3,'Giveaway'),(4,200,1,4,'Group Ticket'),(5,150,3,2,'Themed Promo Code'),(6,150,3,3,'General Admission'),(7,230,1,1,'Giveaway'),(8,135,2,2,'Reserved Seating'),(9,170,2,3,'Early Bird'),(10,210,1,2,'VIP'),(11,195,3,4,'VIP');
+INSERT INTO `Tickets` VALUES (1,120,2,1,'Reserved Seating'),(2,180,4,3,'Giveaway'),(3,200,1,4,'Group Ticket'),(4,150,3,2,'Themed Promo Code'),(5,150,3,3,'General Admission'),(6,230,1,1,'Giveaway'),(7,135,2,2,'Reserved Seating'),(8,170,2,3,'Early Bird'),(9,210,1,2,'VIP'),(10,195,3,4,'VIP');
 /*!40000 ALTER TABLE `Tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -255,4 +253,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-31 12:48:17
+-- Dump completed on 2022-08-04 15:07:23
