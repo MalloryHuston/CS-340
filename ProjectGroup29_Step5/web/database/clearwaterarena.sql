@@ -84,7 +84,7 @@ CREATE TABLE `Concerts_Artists` (
   KEY `fk_Artists_has_Concerts_Artists1_idx` (`artistID`),
   CONSTRAINT `fk_Artists_has_Concerts_Artists1` FOREIGN KEY (`artistID`) REFERENCES `Artists` (`artistID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_Artists_has_Concerts_Concerts1` FOREIGN KEY (`concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,6 +93,7 @@ CREATE TABLE `Concerts_Artists` (
 
 LOCK TABLES `Concerts_Artists` WRITE;
 /*!40000 ALTER TABLE `Concerts_Artists` DISABLE KEYS */;
+INSERT INTO `Concerts_Artists` VALUES (1,4,1),(2,3,1),(3,1,2),(4,2,2),(5,3,3),(6,1,3),(7,4,4),(8,2,4);
 /*!40000 ALTER TABLE `Concerts_Artists` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,7 +114,7 @@ CREATE TABLE `Concerts_Employees` (
   KEY `fk_Employees_has_Concerts_Employees1_idx` (`employeeID`),
   CONSTRAINT `fk_Employees_has_Concerts_Concerts1` FOREIGN KEY (`concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_Employees_has_Concerts_Employees1` FOREIGN KEY (`employeeID`) REFERENCES `Employees` (`employeeID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,6 +123,7 @@ CREATE TABLE `Concerts_Employees` (
 
 LOCK TABLES `Concerts_Employees` WRITE;
 /*!40000 ALTER TABLE `Concerts_Employees` DISABLE KEYS */;
+INSERT INTO `Concerts_Employees` VALUES (1,4,1),(2,3,1),(3,1,2),(4,2,2),(5,3,3),(6,1,3),(7,4,4),(8,2,4);
 /*!40000 ALTER TABLE `Concerts_Employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -253,4 +255,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-04 15:07:23
+-- Dump completed on 2022-08-05 19:20:43
