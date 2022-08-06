@@ -17,7 +17,7 @@ SELECT * FROM Fans;
 
 -- concerts
 -- get all concerts and all artists and employees within the concert
-SELECT Concerts.concertID, Concerts.concertDate, Concerts.numberOfTickets, Artists.name AS artist, Employees.lastName FROM Concerts
+SELECT Concerts.concertID, Concerts.concertDate, Concerts.numberOfTickets, Artists.name AS artist, Employees.lastName AS employee FROM Concerts
 INNER JOIN Concerts_Artists on Concerts_Artists.concertID = Concerts.concertID
 INNER JOIN Artists on Concerts_Artists.artistID = Artists.artistID
 INNER JOIN Concerts_Employees on Concerts_Employees.concertID = Concerts.concertID
@@ -30,9 +30,10 @@ INNER JOIN Concerts ON Concerts.concertID = Tickets.concertID
 INNER JOIN Fans ON Fans.fanID = Tickets.fanID
 INNER JOIN Ticket_Types ON Ticket_Types.ticket_typeID = Tickets.ticket_typeID;
 
--- filter by artist name
-SELECT Artists.name, Concerts.concertDate, Concerts.numberOfTickets FROM Concerts_Artists
-WHERE Artists.name = :artistnamefilter;
+-- filter by concert date
+SELECT Concerts.concertDate, Concerts.numberOfTickets, Artits.name FROM Concerts_Artists
+SELECT Concerts.concertDate, Concerts.numberOfTickets, Employees.lastName FROM Concerts_Employees
+WHERE Concerts.concertDate = :concertdatefilter;
 
 
 -- CREATE OPERATIONS
