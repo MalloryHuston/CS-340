@@ -78,7 +78,7 @@ DELETE FROM Concerts_Artists WHERE concertID = :selectedConcert AND artistID = :
 
 -- delete an entire concert from the Concerts table, all associated entries in both the Concerts_Artists and Concerts_Employees tables should be deleted by CASCADE
 DELETE FROM Concerts
-WHERE concertID = :selectedConcertID;
+WHERE concertID = :selectedConcert;
 
 
 -- set a category in a ticket to be null
