@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `Artists`;
 CREATE TABLE `Artists` (
   `artistID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(145) NOT NULL,
-  `phoneNumber` varchar(50) DEFAULT NULL,
+  `bio` text DEFAULT NULL,
   PRIMARY KEY (`artistID`),
   UNIQUE KEY `artistID_UNIQUE` (`artistID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
@@ -37,8 +37,32 @@ CREATE TABLE `Artists` (
 
 LOCK TABLES `Artists` WRITE;
 /*!40000 ALTER TABLE `Artists` DISABLE KEYS */;
-INSERT INTO `Artists` VALUES (1,'Taylor Swift','(690)055-8784'),(2,'Justin Bieber','(862)342-2448'),(3,'BTS','(650)710-0253'),(4,'Miley Cyrus','(390)184-1545');
+INSERT INTO `Artists` VALUES (1,'Taylor Swift','American singer-songwriter of multiple genres who sold over 200 million records worldwide.'),(2,'Justin Bieber','Canadian pop singer discovered on YouTube with ten number #1 hits.'),(3,'BTS','A seven-member boy band formed in 2013 in Seoul, South Korea.'),(4,'Miley Cyrus','American singer and actress who began her career as Hannah Montana.');
 /*!40000 ALTER TABLE `Artists` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Categories`
+--
+
+DROP TABLE IF EXISTS `Categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Categories` (
+  `categoryID` varchar(45),
+  PRIMARY KEY (`categoryID`),
+  UNIQUE KEY `categoryID_UNIQUE` (`categoryID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Categories`
+--
+
+LOCK TABLES `Categories` WRITE;
+/*!40000 ALTER TABLE `Categories` DISABLE KEYS */;
+INSERT INTO `Categories` VALUES ('Early Bird'),('General Admission'),('Giveaway'),('Group Ticket'),('Reserved Seating'),('Themed Promo Code'),('VIP');
+/*!40000 ALTER TABLE `Categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -52,8 +76,13 @@ CREATE TABLE `Concerts` (
   `concertID` int(11) NOT NULL AUTO_INCREMENT,
   `concertDate` date NOT NULL,
   `numberOfTickets` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `description` text NOT NULL,
+  `artistID` int(11) NOT NULL,
   PRIMARY KEY (`concertID`),
-  UNIQUE KEY `concertID_UNIQUE` (`concertID`)
+  UNIQUE KEY `concertID_UNIQUE` (`concertID`),
+  KEY `fk_Concerts_Artists1_idx` (`artistID`),
+  CONSTRAINT `fk_Concerts_Artists1` FOREIGN KEY (`artistID`) REFERENCES `Artists` (`artistID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -63,38 +92,8 @@ CREATE TABLE `Concerts` (
 
 LOCK TABLES `Concerts` WRITE;
 /*!40000 ALTER TABLE `Concerts` DISABLE KEYS */;
-INSERT INTO `Concerts` VALUES (1,'2022-07-01',5000),(2,'2022-06-17',3891),(3,'2022-05-13',4276),(4,'2022-04-29',4891);
+INSERT INTO `Concerts` VALUES (1,'2022-07-01',5000,'Folklore: Live in Concert','A live performance of all tracks from the Folklore album.',1),(2,'2022-06-17',3891,'Where Are You Now','A live performance of all the greatest JB hits.',2),(3,'2022-05-13',4276,'BTS - Dynamite LIVE','The best k-pop concert in the world.',3),(4,'2022-04-29',4891,'Farewell Hannah Montana','Say hello to the new Miley Cyrus.',4);
 /*!40000 ALTER TABLE `Concerts` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Concerts_Artists`
---
-
-DROP TABLE IF EXISTS `Concerts_Artists`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Concerts_Artists` (
-  `concert_artistID` int(11) NOT NULL AUTO_INCREMENT,
-  `artistID` int(11) NOT NULL,
-  `concertID` int(11) NOT NULL,
-  PRIMARY KEY (`concert_artistID`),
-  UNIQUE KEY `concert_artistID_UNIQUE` (`concert_artistID`),
-  KEY `fk_Artists_has_Concerts_Concerts1_idx` (`concertID`),
-  KEY `fk_Artists_has_Concerts_Artists1_idx` (`artistID`),
-  CONSTRAINT `fk_Artists_has_Concerts_Artists1` FOREIGN KEY (`artistID`) REFERENCES `Artists` (`artistID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_Artists_has_Concerts_Concerts1` FOREIGN KEY (`concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Concerts_Artists`
---
-
-LOCK TABLES `Concerts_Artists` WRITE;
-/*!40000 ALTER TABLE `Concerts_Artists` DISABLE KEYS */;
-INSERT INTO `Concerts_Artists` VALUES (1,4,1),(2,3,1),(3,1,2),(4,2,2),(5,3,3),(6,1,3),(7,4,4),(8,2,4);
-/*!40000 ALTER TABLE `Concerts_Artists` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -189,30 +188,6 @@ INSERT INTO `Fans` VALUES (1,'Ryan','Reynolds','theryanreynolds@gmail.com','(553
 UNLOCK TABLES;
 
 --
--- Table structure for table `Ticket_Types`
---
-
-DROP TABLE IF EXISTS `Ticket_Types`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Ticket_Types` (
-  `ticket_typeID` varchar(45) NOT NULL,
-  PRIMARY KEY (`ticket_typeID`),
-  UNIQUE KEY `ticket_typeID_UNIQUE` (`ticket_typeID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Ticket_Types`
---
-
-LOCK TABLES `Ticket_Types` WRITE;
-/*!40000 ALTER TABLE `Ticket_Types` DISABLE KEYS */;
-INSERT INTO `Ticket_Types` VALUES ('Early Bird'),('General Admission'),('Giveaway'),('Group Ticket'),('Reserved Seating'),('Themed Promo Code'),('VIP');
-/*!40000 ALTER TABLE `Ticket_Types` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Tickets`
 --
 
@@ -222,17 +197,18 @@ DROP TABLE IF EXISTS `Tickets`;
 CREATE TABLE `Tickets` (
   `ticketID` int(11) NOT NULL AUTO_INCREMENT,
   `duration` int(11) NOT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
   `concertID` int(11) NOT NULL,
   `fanID` int(11) NOT NULL,
-  `ticket_typeID` varchar(45) NOT NULL,
+  `categoryID` varchar(45),
   PRIMARY KEY (`ticketID`),
   UNIQUE KEY `ticketID_UNIQUE` (`ticketID`),
   KEY `fk_Tickets_Concerts1_idx` (`concertID`),
   KEY `fk_Tickets_Fans1_idx` (`fanID`),
-  KEY `fk_Tickets_Ticket_Types1_idx` (`ticket_typeID`),
+  KEY `fk_Tickets_Categories1_idx` (`categoryID`),
+  CONSTRAINT `fk_Tickets_Categories1` FOREIGN KEY (`categoryID`) REFERENCES `Categories` (`categoryID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_Tickets_Concerts1` FOREIGN KEY (`concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_Tickets_Fans1` FOREIGN KEY (`fanID`) REFERENCES `Fans` (`fanID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_Tickets_Ticket_Types1` FOREIGN KEY (`ticket_typeID`) REFERENCES `Ticket_Types` (`ticket_typeID`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_Tickets_Fans1` FOREIGN KEY (`fanID`) REFERENCES `Fans` (`fanID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -242,7 +218,7 @@ CREATE TABLE `Tickets` (
 
 LOCK TABLES `Tickets` WRITE;
 /*!40000 ALTER TABLE `Tickets` DISABLE KEYS */;
-INSERT INTO `Tickets` VALUES (1,120,2,1,'Reserved Seating'),(2,180,4,3,'Giveaway'),(3,200,1,4,'Group Ticket'),(4,150,3,2,'Themed Promo Code'),(5,150,3,3,'General Admission'),(6,230,1,1,'Giveaway'),(7,135,2,2,'Reserved Seating'),(8,170,2,3,'Early Bird'),(9,210,1,2,'VIP'),(10,195,3,4,'VIP');
+INSERT INTO `Tickets` VALUES (1,120,750.20,2,1,'Reserved Seating'),(2,180,NULL,4,3,'Giveaway'),(3,200,999.00,1,4,'Group Ticket'),(4,150,400.30,3,2,'Themed Promo Code'),(5,150,250.00,3,3,'General Admission'),(6,230,NULL,1,1,'Giveaway'),(7,135,775.00,2,2,'Reserved Seating'),(8,170,500.50,2,3,'Early Bird'),(9,210,1500.00,1,2,'VIP'),(10,195,1250.00,3,4,'VIP');
 /*!40000 ALTER TABLE `Tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -255,4 +231,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-05 19:20:43
+-- Dump completed on 2022-08-06 10:46:40
