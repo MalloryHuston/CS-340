@@ -23,7 +23,7 @@ INNER JOIN Employees on Concerts_Employees.employeeID = Employees.employeeID;
 
 -- tickets
 -- get all tickets and the corresponding concert, fan, and type of ticket category
-SELECT Tickets.ticketID, Tickets.duration, Concerts.concertDate AS concert, Fans.email AS fan, Categories.categoryID AS category FROM Tickets
+SELECT Tickets.ticketID, Tickets.duration, Concerts.name AS concert, Fans.email AS fan, Categories.categoryID AS category FROM Tickets
 INNER JOIN Concerts ON Concerts.concertID = Tickets.concertID
 INNER JOIN Fans ON Fans.fanID = Tickets.fanID
 INNER JOIN Categories ON Categories.categoryID = Tickets.categoryID;
