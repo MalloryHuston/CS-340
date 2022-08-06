@@ -3,10 +3,6 @@
 -- get all types of ticket categories
 SELECT Categories.categoryID FROM Categories;
 
--- artists
--- get all artists
-SELECT * FROM Artists;
-
 -- employees
 -- get all employees
 SELECT * FROM Employees;
@@ -14,6 +10,10 @@ SELECT * FROM Employees;
 -- fans
 -- get all fans
 SELECT * FROM Fans;
+
+-- artists
+-- get all artists
+SELECT Artists.artistID, Artists.name, Artists.bio FROM Artists;
 
 -- concerts
 -- get all concerts and all employees within the concert
@@ -57,10 +57,10 @@ INSERT INTO Concerts_Employees (Concerts_Employees.concertID, Concerts_Employees
 
 
 -- UPDATE OPERATIONS
--- update a fan
-UPDATE Fans
-    SET firstName = :firstNameInput, lastName = :lastNameInput, email = :emailInput, phoneNumber = :phoneNumberInput, streetAddress = :streetAddressInput, city = :cityInput, state = :stateInput, zipCode = :zipCodeInput
-    WHERE fanID = :selectedFanID;
+-- update an artist
+UPDATE Artists
+    SET name = :nameInput, bio = :bioInput
+    WHERE artistID = :selectedArtistID;
 
 
 -- DELETE OPERATIONS
