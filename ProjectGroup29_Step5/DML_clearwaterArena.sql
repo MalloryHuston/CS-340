@@ -1,6 +1,6 @@
 -- READ OPERATIONS
 -- categories
--- get all types ticket categories
+-- get all types of ticket categories
 SELECT Categories.categoryID FROM Categories;
 
 -- artists
@@ -44,7 +44,7 @@ INSERT INTO Concerts (Concerts.concertDate, Concerts.numberOfTickets, Concerts.n
 INSERT INTO Artists (Artists.name, Artists.bio) VALUES (:nameInput, :bioInput);
 
 -- create a new Ticket
-INSERT INTO Tickets (Tickets.duration, Tickets.concertID, Tickets.fanID, Tickets.categoryID) VALUES (:durationInput, :concertIDFromDropDown, :fanIDFromDropDown, :categoryIDFromDropDown);
+INSERT INTO Tickets (Tickets.duration, Tickets.price, Tickets.concertID, Tickets.fanID, Tickets.categoryID) VALUES (:durationInput, :priceInput, :concertIDFromDropDown, :fanIDFromDropDown, :categoryIDFromDropDown);
 
 -- create a new Employee
 INSERT INTO Employees (Employees.firstName, Employees.lastName, Employees.role, Employees.email, Employees.phoneNumber) VALUES (:firstNameInput, :lastNameInput, :roleInput, :emailInput, :phoneNumberInput);
