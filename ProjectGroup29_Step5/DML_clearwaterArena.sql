@@ -65,7 +65,7 @@ INSERT INTO Concerts_Employees (Concerts_Employees.concertID, Concerts_Employees
 -- UPDATE OPERATIONS
 -- update a fan
 UPDATE Fans
-    SET firstName = :firstNameInput, lastName = :lastNameInput, email = :emailInput, streetAddress = :streetAddressInput, city = :cityInput, state = :stateInput, zipCode = :zipCodeInput
+    SET firstName = :firstNameInput, lastName = :lastNameInput, email = :emailInput, phoneNumber = :phoneNumberInput, streetAddress = :streetAddressInput, city = :cityInput, state = :stateInput, zipCode = :zipCodeInput
     WHERE fanID = :selectedFanID;
 
 
