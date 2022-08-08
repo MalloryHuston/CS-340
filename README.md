@@ -30,7 +30,7 @@ Once your branch is ready to be merged to master, follow these steps:
 <pre>
 <code>git add .
 git commit -m "message"
-git push origin <branch name> – This creates the branch remotely and pushes to that branch on GitHub</code>
+git push origin &lt;new branch name&gt; – This creates the branch remotely and pushes to that branch on GitHub</code>
 </pre>
 
 * Go to GitHub and create a new pull request
