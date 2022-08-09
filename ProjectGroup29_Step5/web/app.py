@@ -62,9 +62,9 @@ def add_artist():
 
     elif request.method == 'POST':
         artist_name = request.form['name']
-        phone_number = request.form['numb']
+        bio = request.form['bio']
 
-        query = 'INSERT INTO Artists (name, phoneNumber) VALUES (artist_name, phone_number)'
+        query = 'INSERT INTO Artists (name, bio) VALUES (artist_name, bio)'
         execute_query(db_connection, query)
         return("/home")
 
@@ -129,9 +129,9 @@ def update_artist(id):
         return render_template("/update-artist", result=res)
         
     elif request.method == 'POST':
-        phone_number = request.form['phonenumber']
-        query = 'UPDATE Artists SET phoneNumber = %s WHERE artistID = %s;'
-        execute_query(db_connection, query, phone_number)
+        bio = request.form['bio']
+        query = 'UPDATE Artists SET bio = %s WHERE artistID = %s;'
+        execute_query(db_connection, query, bio)
         return('/add-artist')
 
 
