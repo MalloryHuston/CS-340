@@ -1,0 +1,36 @@
+{% extends “layouts/main.html” %}
+{% block body %}
+<div>           
+    <h3>Fans</h3>
+    <table>
+        <thead>
+            <th>FanID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Street Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip Code</th>
+        </thead>
+        <tbody>
+        {% for r in fans %}
+        <tr>
+            <td> {{ r.0 }}</td>
+            <td> {{ r.1 }}</td>
+            <td> {{ r.2 }}</td>
+            <td> {{ r.3 }}</td>
+            <td> {{ r.4 }}</td>
+            <td> {{ r.5 }}</td>
+            <td> {{ r.6 }}</td>
+            <td> {{ r.7 }}</td>
+            <td> {{ r.8 }}</td>
+            <td> <input type='button' name='Update' value='Update' onclick="window.location = '/update-fan/{{r[0]}}'"> </td>
+            <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete-fan/{{r[0]}}'"> </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
