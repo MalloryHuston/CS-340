@@ -1,6 +1,6 @@
 -- MariaDB dump 10.19  Distrib 10.4.25-MariaDB, for Linux (x86_64)
 --
--- Host: classmysql.engr.oregonstate.edu    Database: cs340_hustonm
+-- Host: classmysql.engr.oregonstate.edu    Database: cs340_diagours
 -- ------------------------------------------------------
 -- Server version	10.6.8-MariaDB-log
 
@@ -25,10 +25,9 @@ DROP TABLE IF EXISTS `Artists`;
 CREATE TABLE `Artists` (
   `artistID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(145) NOT NULL,
-  `bio` text DEFAULT NULL,
-  PRIMARY KEY (`artistID`),
-  UNIQUE KEY `artistID_UNIQUE` (`artistID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+  `phoneNumber` int(11) DEFAULT NULL,
+  PRIMARY KEY (`artistID`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,32 +36,8 @@ CREATE TABLE `Artists` (
 
 LOCK TABLES `Artists` WRITE;
 /*!40000 ALTER TABLE `Artists` DISABLE KEYS */;
-INSERT INTO `Artists` VALUES (1,'Taylor Swift','American singer-songwriter of multiple genres who sold over 200 million records worldwide.'),(2,'Justin Bieber','Canadian pop singer discovered on YouTube with ten number #1 hits.'),(3,'BTS','A seven-member boy band formed in 2013 in Seoul, South Korea.'),(4,'Miley Cyrus','American singer and actress who began her career as Hannah Montana.');
+INSERT INTO `Artists` VALUES (1,'Taylor Swift',2147483647),(3,'Justin Bieber',2147483647),(7,'BTS',2147483647);
 /*!40000 ALTER TABLE `Artists` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Categories`
---
-
-DROP TABLE IF EXISTS `Categories`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Categories` (
-  `categoryID` varchar(45),
-  PRIMARY KEY (`categoryID`),
-  UNIQUE KEY `categoryID_UNIQUE` (`categoryID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Categories`
---
-
-LOCK TABLES `Categories` WRITE;
-/*!40000 ALTER TABLE `Categories` DISABLE KEYS */;
-INSERT INTO `Categories` VALUES ('Early Bird'),('General Admission'),('Giveaway'),('Group Ticket'),('Reserved Seating'),('Themed Promo Code'),('VIP');
-/*!40000 ALTER TABLE `Categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -74,16 +49,10 @@ DROP TABLE IF EXISTS `Concerts`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Concerts` (
   `concertID` int(11) NOT NULL AUTO_INCREMENT,
-  `concertDate` date NOT NULL,
-  `numberOfTickets` int(11) NOT NULL,
-  `name` varchar(45) NOT NULL,
-  `description` text NOT NULL,
-  `artistID` int(11) NOT NULL,
-  PRIMARY KEY (`concertID`),
-  UNIQUE KEY `concertID_UNIQUE` (`concertID`),
-  KEY `fk_Concerts_Artists1_idx` (`artistID`),
-  CONSTRAINT `fk_Concerts_Artists1` FOREIGN KEY (`artistID`) REFERENCES `Artists` (`artistID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+  `concertDate` date DEFAULT NULL,
+  `numberOfTickets` int(11) DEFAULT NULL,
+  PRIMARY KEY (`concertID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,38 +61,62 @@ CREATE TABLE `Concerts` (
 
 LOCK TABLES `Concerts` WRITE;
 /*!40000 ALTER TABLE `Concerts` DISABLE KEYS */;
-INSERT INTO `Concerts` VALUES (1,'2022-07-01',5000,'Folklore: Live in Concert','A live performance of all tracks from the Folklore album.',1),(2,'2022-06-17',3891,'Where Are You Now','A live performance of all the greatest JB hits.',2),(3,'2022-05-13',4276,'BTS - Dynamite LIVE','The best k-pop concert in the world.',3),(4,'2022-04-29',4891,'Farewell Hannah Montana','Say hello to the new Miley Cyrus.',4);
+INSERT INTO `Concerts` VALUES (1,'2022-07-01',5000),(3,'2022-06-17',3891),(6,'2022-05-13',4276);
 /*!40000 ALTER TABLE `Concerts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Concerts_Employees`
+-- Table structure for table `Concerts_has_Artists`
 --
 
-DROP TABLE IF EXISTS `Concerts_Employees`;
+DROP TABLE IF EXISTS `Concerts_has_Artists`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Concerts_Employees` (
-  `concert_employeeID` int(11) NOT NULL AUTO_INCREMENT,
-  `employeeID` int(11) NOT NULL,
+CREATE TABLE `Concerts_has_Artists` (
   `concertID` int(11) NOT NULL,
-  PRIMARY KEY (`concert_employeeID`),
-  UNIQUE KEY `concert_employeeID_UNIQUE` (`concert_employeeID`),
-  KEY `fk_Employees_has_Concerts_Concerts1_idx` (`concertID`),
-  KEY `fk_Employees_has_Concerts_Employees1_idx` (`employeeID`),
-  CONSTRAINT `fk_Employees_has_Concerts_Concerts1` FOREIGN KEY (`concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_Employees_has_Concerts_Employees1` FOREIGN KEY (`employeeID`) REFERENCES `Employees` (`employeeID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+  `artistID` int(11) NOT NULL,
+  KEY `fk_Concerts_has_Artists_Concerts1_idx` (`concertID`),
+  KEY `fk_Concerts_has_Artists_Artists1_idx` (`artistID`,`concertID`),
+  CONSTRAINT `fk_Concerts_has_Artists_artistID` FOREIGN KEY (`artistID`) REFERENCES `Artists` (`artistID`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Concerts_has_Artists_concertID` FOREIGN KEY (`concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Concerts_Employees`
+-- Dumping data for table `Concerts_has_Artists`
 --
 
-LOCK TABLES `Concerts_Employees` WRITE;
-/*!40000 ALTER TABLE `Concerts_Employees` DISABLE KEYS */;
-INSERT INTO `Concerts_Employees` VALUES (1,4,1),(2,3,1),(3,1,2),(4,2,2),(5,3,3),(6,1,3),(7,4,4),(8,2,4);
-/*!40000 ALTER TABLE `Concerts_Employees` ENABLE KEYS */;
+LOCK TABLES `Concerts_has_Artists` WRITE;
+/*!40000 ALTER TABLE `Concerts_has_Artists` DISABLE KEYS */;
+INSERT INTO `Concerts_has_Artists` VALUES (6,1),(1,3),(3,7);
+/*!40000 ALTER TABLE `Concerts_has_Artists` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Concerts_has_Employees`
+--
+
+DROP TABLE IF EXISTS `Concerts_has_Employees`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Concerts_has_Employees` (
+  `concertID` int(11) NOT NULL AUTO_INCREMENT,
+  `employeeID` int(11) NOT NULL,
+  KEY `fk_Concerts_has_Employees_Employees1_idx` (`employeeID`),
+  KEY `fk_Concerts_has_Employees_Concerts1_idx` (`concertID`),
+  CONSTRAINT `fk_Concerts_has_Employees_Concerts1` FOREIGN KEY (`concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Concerts_has_Employees_Employees1` FOREIGN KEY (`employeeID`) REFERENCES `Employees` (`employeeID`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Concerts_has_Employees`
+--
+
+LOCK TABLES `Concerts_has_Employees` WRITE;
+/*!40000 ALTER TABLE `Concerts_has_Employees` DISABLE KEYS */;
+INSERT INTO `Concerts_has_Employees` VALUES (1,6),(1,9),(3,1),(3,6),(6,1),(6,4);
+/*!40000 ALTER TABLE `Concerts_has_Employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -135,14 +128,13 @@ DROP TABLE IF EXISTS `Employees`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Employees` (
   `employeeID` int(11) NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(45) NOT NULL,
-  `lastName` varchar(45) NOT NULL,
-  `role` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL,
-  `phoneNumber` varchar(50) NOT NULL,
-  PRIMARY KEY (`employeeID`),
-  UNIQUE KEY `employeeID_UNIQUE` (`employeeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+  `firstName` varchar(45) DEFAULT NULL,
+  `lastName` varchar(45) DEFAULT NULL,
+  `role` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `phoneNumber` int(11) DEFAULT NULL,
+  PRIMARY KEY (`employeeID`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +143,7 @@ CREATE TABLE `Employees` (
 
 LOCK TABLES `Employees` WRITE;
 /*!40000 ALTER TABLE `Employees` DISABLE KEYS */;
-INSERT INTO `Employees` VALUES (1,'Mike','Bailey','Security Officer','mbailey475@gmail.com','(487)231-0842'),(2,'Wanda','Sykes','Sound Engineer','wsykes1964@hotmail.com','(333)377-5592'),(3,'Harry','Styles','Ticket Vendor','hstyles1d@yahoo.com','(774)002-0251'),(4,'Lisa','Kudrow','Event Planner','lkudrow1994@outlook.com','(251)812-8883');
+INSERT INTO `Employees` VALUES (1,'Mike','Bailey','Security Officer','mbailey475@gmail.com',2147483647),(4,'Wanda','Sykes','Sound Engineer','wsykes1964@hotmail.com',2104920033),(6,'Harry','Styles','Ticket Vendor','hstyles1d@yahoo.com',2147483647),(9,'Lisa','Kudrow','Event Planner','lkudrow1994@outlook.com',2147483647);
 /*!40000 ALTER TABLE `Employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,16 +156,15 @@ DROP TABLE IF EXISTS `Fans`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Fans` (
   `fanID` int(11) NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(45) NOT NULL,
-  `lastName` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL,
-  `phoneNumber` varchar(50) DEFAULT NULL,
+  `firstName` varchar(45) DEFAULT NULL,
+  `lastName` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `phoneNumber` int(11) DEFAULT NULL,
   `streetAddress` varchar(145) DEFAULT NULL,
   `city` varchar(45) DEFAULT NULL,
   `state` varchar(45) DEFAULT NULL,
-  `zipCode` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`fanID`),
-  UNIQUE KEY `fanID_UNIQUE` (`fanID`)
+  `zipCode` int(11) DEFAULT NULL,
+  PRIMARY KEY (`fanID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -183,7 +174,7 @@ CREATE TABLE `Fans` (
 
 LOCK TABLES `Fans` WRITE;
 /*!40000 ALTER TABLE `Fans` DISABLE KEYS */;
-INSERT INTO `Fans` VALUES (1,'Ryan','Reynolds','theryanreynolds@gmail.com','(553)167-4577','310 Gosling Way','Madison','WI','53558'),(2,'Vanessa','Hudgens','vhudgens2005@yahoo.com','(614)697-1403','80 Pomegranate Street','Madison','WI','53701'),(3,'Danny','DeVito','dannymyman@hotmail.com','(612)778-5977','2006 Sunshine Avenue','Green Bay','WI','54229'),(4,'Betty','White','goldengirl1922@outlook.com','(860)870-1880','12 Rodgers Road','Green Bay','WI','54301');
+INSERT INTO `Fans` VALUES (1,'Ryan','Reynolds','theryanreynolds@gmail.com',2147483647,'310 Gosling Way','Madison','WI',53558),(2,'Vanessa','Hudgens','vhudgens2005@yahoo.com',2147483647,'80 Pomegranate Street','Madison','WI',53701),(3,'Danny','DeVito','dannymyman@hotmail.com',2147483647,'2006 Sunshine Avenue','Green Bay','WI',54229),(4,'Betty','White','goldengirl1922@outlook.com',2147483647,'12 Rodgers Road','Green Bay','WI',54229);
 /*!40000 ALTER TABLE `Fans` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,20 +187,14 @@ DROP TABLE IF EXISTS `Tickets`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Tickets` (
   `ticketID` int(11) NOT NULL AUTO_INCREMENT,
-  `duration` int(11) NOT NULL,
-  `price` decimal(10,2) DEFAULT NULL,
   `concertID` int(11) NOT NULL,
   `fanID` int(11) NOT NULL,
-  `categoryID` varchar(45),
   PRIMARY KEY (`ticketID`),
-  UNIQUE KEY `ticketID_UNIQUE` (`ticketID`),
   KEY `fk_Tickets_Concerts1_idx` (`concertID`),
   KEY `fk_Tickets_Fans1_idx` (`fanID`),
-  KEY `fk_Tickets_Categories1_idx` (`categoryID`),
-  CONSTRAINT `fk_Tickets_Categories1` FOREIGN KEY (`categoryID`) REFERENCES `Categories` (`categoryID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_Tickets_Concerts1` FOREIGN KEY (`concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_Tickets_Fans1` FOREIGN KEY (`fanID`) REFERENCES `Fans` (`fanID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_Tickets_Concerts1` FOREIGN KEY (`concertID`) REFERENCES `Concerts` (`concertID`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Tickets_Fans1` FOREIGN KEY (`fanID`) REFERENCES `Fans` (`fanID`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -218,7 +203,7 @@ CREATE TABLE `Tickets` (
 
 LOCK TABLES `Tickets` WRITE;
 /*!40000 ALTER TABLE `Tickets` DISABLE KEYS */;
-INSERT INTO `Tickets` VALUES (1,120,750.20,2,1,'Reserved Seating'),(2,180,NULL,4,3,'Giveaway'),(3,200,999.00,1,4,'Group Ticket'),(4,150,400.30,3,2,'Themed Promo Code'),(5,150,250.00,3,3,'General Admission'),(6,230,NULL,1,1,'Giveaway'),(7,135,775.00,2,2,'Reserved Seating'),(8,170,500.50,2,3,'Early Bird'),(9,210,1500.00,1,2,'VIP'),(10,195,1250.00,3,4,'VIP');
+INSERT INTO `Tickets` VALUES (1,6,4),(2,6,1),(3,3,3),(4,3,4),(5,1,1),(6,1,3),(7,1,2),(8,3,1),(9,6,2),(10,1,4),(11,1,1);
 /*!40000 ALTER TABLE `Tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -231,4 +216,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-06 10:46:40
+-- Dump completed on 2022-07-26 19:33:52
