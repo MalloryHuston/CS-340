@@ -1,0 +1,101 @@
+<!-- ticket.hbs -->
+
+<head>
+    <title>Tickets</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<h1>Tickets</h1>
+
+[ <a href="artists">Artists</a> | <a href="concerts">Concerts</a> | <a href="tickets">Tickets</a> | <a
+    href="employees">Employees</a> | <a href="fans">Fans</a> | <a href="categories">Ticket Categories</a> ]
+
+{{!-- Create a table --}}
+<table id="tickets-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the ticketID, duration, price, concertID, fanID, and categoryID in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.ticketID}}</td>
+            <td>{{this.duration}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.concert}}</td>
+            <td>{{this.fan}}</td>
+            <td>{{this.category}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+
+{{!-- Form to add a record to the table using standard HTML forms --}}
+<h2>Add a Ticket</h2>
+<p>To add a new ticket, please enter their information below and click `Submit`!</p>
+<form id="add-ticket-form" method="POST" action="/add-ticket-form">
+    <label for="input-duration">Duration: </label>
+    <input type="number" name="input-duration" id="input-duration-html">
+
+    <label for="input-price">Price: </label>
+    <input type="number" name="input-price" id="input-price-html">
+
+    <label for="input-concert">Concert: </label>
+    <select name="input-concert" id="input-concert-html">
+        <option value="">Select a Concert</option>
+        {{#each concerts}}
+        <option value="{{this.concertID}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-fan">Fan</label>: </label>
+    <select name="input-fan" id="input-fan-html">
+        <option value="">Select a Fan</option>
+        {{#each fans}}
+        <option value="{{this.fanID}}">{{this.email}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-category">Ticket Category</label>:</label>
+    <select name="input-category" id="input-category-html">
+        <option value="">Select a Ticket Category</option>
+        {{#each categories}}
+        <option value="{{this.categoryID}}">{{this.categoryID}}</option>
+        {{/each}}
+    </select>
+
+    <input type="submit">
+</form>
+
+
+<h2>Set a Ticket Category to be Null</h2>
+<p>Select the ticket to remove category of.</p>
+<form id="update-ticket-form-ajax">
+
+    <label for="input-fanemail">ticketFan: </label>
+    <select name="input-fanemail" id="mySelect">
+        <option value="test">Select the Ticket</option>
+        {{#each data}}
+        <option value="{{this.ticketID}}">{{this.fan}}</option>
+        {{/each}}
+    </select>
+
+    <input type="submit">
+
+</form>
+<script src="./js/remove_category.js"></script>

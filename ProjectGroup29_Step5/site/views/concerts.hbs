@@ -1,0 +1,125 @@
+<!-- concerts.hbs -->
+
+<head>
+    <title>Concerts</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="./js/delete_employee_from_concert.js" type="text/javascript"></script>
+    <script src="./js/filter_concerts.js" type="text/javascript"></script>
+</head>
+
+<h1>Concerts</h1>
+
+[ <a href="artists">Artists</a> | <a href="concerts">Concerts</a> | <a href="tickets">Tickets</a> | <a
+    href="employees">Employees</a> | <a href="fans">Fans</a> | <a href="categories">Ticket Categories</a> ]
+
+{{!-- Create a table --}}
+<table id="concerts-table">
+    
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th>concertID</th>
+            <th>concert date</th>
+            <th>number of tickets sold</th>
+            <th>concert name</th>
+            <th>concert description</th>
+            <th>employee last name</th>
+            <th>remove employee</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+        <tr>
+            <td>
+                <input type="text" id="concertID-filter"
+                    onkeyup="filterConcert(document.getElementById('concertID-filter'))">
+            </td>
+            <td>
+                <input type="date" id="concertDate-filter"
+                    onkeyup="filterConcert(document.getElementById('concertDate-filter'))">
+            </td>
+            <td>
+                <input type="number" id="numberOfTickets-filter"
+                    onkeyup="filterConcert(document.getElementById('numberOfTickets-filter'))">
+            </td>
+            <td>
+                <input type="text" id="name-filter" onkeyup="filterConcert(document.getElementById('name-filter'))">
+            </td>
+            <td>
+                <input type="text" id="description-filter"
+                    onkeyup="filterConcert(document.getElementById('description-filter'))">
+            </td>
+            <td>
+                <input type="text" id="employee-filter" onkeyup="filterConcert(document.getElementById('employee-filter'))">
+            </td>
+        </tr>
+
+        {{!-- For each row, print the concertID, concertDate, numberOfTickets, name, and description in order --}}
+        {{#each data}}
+        <tr concertid-value={{this.concertID}} employeeid-value={{this.employeeID}}>
+            <td>{{this.concertID}}</td>
+            <td>{{this.concertDate}}</td>
+            <td>{{this.numberOfTickets}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.description}}</td>
+            <td>{{this.lastName}}</td>
+            <td><button onclick="deleteEmployeeFromConcert({{this.concertID}}, {{this.employeeID}})">X</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+
+{{!-- Form to add a record to the table using standard HTML forms --}}
+<h2>Adding Data using an HTML form</h2>
+<p>To add a new concert please enter its date, number of tickets sold, its name, a short description (optional), and the artist associated with the 
+    concert below and click `Submit`!</p>
+<form id="add-concert-form" method="POST" action="/add-concert-form">
+    <label for="input-new_concert-concertDate">Concert Date: </label>
+    <input type="date" name="input-new_concert-concertDate" id="input-new_concert-concertDate-html">
+
+    <label for="input-new_concert-numberOfTickets">Number of Tickets Sold: </label>
+    <input type="number" name="input-new_concert-numberOfTickets" id="input-new_concert-numberOfTickets-html">
+
+    <label for="input-new_concert-name">Concert Name: </label>
+    <input type="text" name="input-new_concert-name" id="input-new_concert-name-html">
+
+    <label for="input-new_concert-description">Description: </label>
+    <input type="text" name="input-new_concert-description" id="input-new_concert-description-html">
+
+    <label for="input-new_concert-artist">Artist: </label>
+    <select name="input-new_concert-artist" id="input-new_concert-artist-html">
+        <option value="">Select an Artist</option>
+        {{#each artists}}
+        <option valu="{{this.artistID}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <input type="submit">
+</form>
+
+<p>To add an employee to an existing concert, please select the concert and employee below and click `Submit`!</p>
+<form id="add-employee_to_concert-form" method="POST" action="/add-employee_to_concert-form">
+    <label for="input-existing_concert-concertid">Concert: </label>
+    <select name="input-existing_concert-concertid" id="input-existing_concert-name-html">
+        <option value="">Select a Concert</option>
+        {{#each concerts_only}}
+        <option value="{{this.concertID}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-existing_concert-employeeid">Employee: </label>
+    <select name="input-existing_concert-employeeid" id="input-existing_concert-employee-html">
+        <option value="">Select an Employee</option>
+        {{#each employees}}
+        <option value="{{this.employeeID}}">{{this.lastName}}</option>
+        {{/each}}
+    </select>
+
+    <input type="submit">
+</form>

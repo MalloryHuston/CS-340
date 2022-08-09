@@ -1,0 +1,82 @@
+<!-- artists.hbs -->
+
+<head>
+    <title>Artists</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<h1>Artists</h1>
+
+[ <a href="artists">Artists</a> | <a href="concerts">Concerts</a> | <a href="tickets">Tickets</a> | <a
+    href="employees">Employees</a> | <a href="fans">Fans</a> | <a href="categories">Ticket Categories</a> ]
+
+{{!-- Create a table --}}
+<table id="artists-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the artistID, name, and bio in order --}}
+        {{#each data}}
+        <tr data-value={{this.artistID}}>
+            <td>{{this.artistID}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.bio}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+
+{{!-- Form to add a record to the table  --}}
+<h2>Add an Artist</h2>
+<p>To add a new artist, please enter their information below and click 'Submit'!</p>
+<form id="add-artist-form-ajax">
+    <label for="input-name">Name: </label>
+    <input type="text" name="input-name" id="input-name">
+
+    <label for="input-bio">Bio: </label>
+    <input type="text" name="input-bio" id="input-bio">
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_artist.js"></script>
+
+<h2>Update an Artist</h2>
+<p>To update an artist, select their ID from the dropdown and change the parameters.</p>
+<form id="update-artist-form-ajax">
+
+    <label for="input-fullname">artistID: </label>
+    <select name="input-fullname" id="mySelect">
+        <option value="test">Select an Artist</option>
+        {{#each data}}
+        <option value="{{this.artistID}}">{{this.artistID}}</option>"
+        {{/each}}
+    </select>
+
+    <label for="input-name">name: </label>
+    <input name="input-name" id="input-name-update">
+
+    <label for="input-bio">bio: </label>
+    <input name="input-bio" id="input-bio-update">
+
+    <input type="submit">
+</form>
+
+<script src="./js/update_artist.js"></script>
