@@ -1,0 +1,42 @@
+<!-- categories.hbs -->
+
+<head>
+    <title>Types of Tickets</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<h1>Types of Tickets</h1>
+
+[ <a href="artists">Artists</a> | <a href="concerts">Concerts</a> | <a href="tickets">Tickets</a> | <a
+    href="employees">Employees</a> | <a href="fans">Fans</a> | <a href="categories">Ticket Categories</a> ]
+
+{{!-- Create a table --}}
+<table id="categories-table">
+    
+    {{!-- Header section --}}
+    <thead>
+        <tr>
+            <th>categoryID</th>
+        </tr>
+    </thead>
+    
+    {{!-- For just the first row, we print each key of the row object as a header cell so we
+    know what each column means when the page renders --}}
+    <tbody>
+        {{#each data}}
+        <tr category-value={{this.categoryID}}>
+            <td>{{this.categoryID}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- Form to add a record to the table using standard HTML forms --}}
+<h2>Add a Ticket Category</h2>
+<p>To add a new ticket category, please enter its name (also known as its categoryID) below and click `Submit`!</p>
+<form id="add-category-form" method="POST" action="/add-category-form">
+    <label for="input-categoryID">Type of Ticket: </label>
+    <input type="text" name="input-categoryID" id="input-category-html">
+
+    <input type="submit">
+</form>

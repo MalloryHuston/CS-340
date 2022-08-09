@@ -1,0 +1,48 @@
+/*
+/   Sets css style properties for the table on the Concerts page so that rows are hidden if they do not match the entered filter/search.
+*/
+function filterConcert(filter_element) {
+    let query = filter_element.value.toLowerCase();
+    let rows = document.getElementsByTagName("tr");
+
+    // Determine what column to filter by.
+    let column;
+    switch (filter_element.id) {
+        case "concertID-filter":
+            column = 0;
+            break;
+        case "concertDate-filter":
+            column = 1;
+            break;
+        case "numberOfTickets-filter":
+            column = 2;
+            break;
+        case "name-filter":
+            column = 3;
+            break;
+        case "description-filter":
+            column = 4;
+            break;
+        case "employee-filter":
+            column = 5;
+            break;
+        default:
+            console.error(`Filter ID is incorrect...}`);
+            console.log(filter_element);
+            break;
+    }
+
+    // Loop through all rows in the table, setting the css style for display to none for the row if the cell in the applicable column does not match the filter query.
+    for (i = 2; i < rows.length; i++) {
+
+        // Determine the contents of the cell for the row based on the column being filtered.
+        let value = rows[i].getElementsByTagName("td")[column].textContent.toLowerCase();
+
+        // Set the css style property if there is a match (not -1 using indexOf).
+        if (value.indexOf(query) > -1) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }
+    }
+}

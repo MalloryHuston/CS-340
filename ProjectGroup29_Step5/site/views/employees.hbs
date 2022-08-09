@@ -1,0 +1,69 @@
+<!-- employees.hbs -->
+
+<head>
+    <title>Employees</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<h1>Employees</h1>
+
+[ <a href="artists">Artists</a> | <a href="concerts">Concerts</a> | <a href="tickets">Tickets</a> | <a
+    href="employees">Employees</a> | <a href="fans">Fans</a> | <a href="categories">Ticket Categories</a> ]
+
+{{!-- Create a table --}}
+<table id="employees-table">
+   
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the employeeID, firstName, lastName, role, email, and phoneNumber in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.employeeID}}</td>
+            <td>{{this.firstName}}</td>
+            <td>{{this.lastName}}</td>
+            <td>{{this.role}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.phoneNumber}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+
+{{!-- Form to add a record to the table  --}}
+<h2>Add an Employee</h2>
+<p>To add a new employee, please enter their information below and click 'Submit'!</p>
+<form id="add-employee-form" method="POST" action="/add-employee-form">
+    <label for="input-firstName">First Name: </label>
+    <input type="text" name="input-firstName" id="input-firstName">
+    
+    <label for="input-lastName">Last Name: </label>
+    <input type="text" name="input-lastName" id="input-lastName">
+
+    <label for="input-role">Role: </label>
+    <input type="text" name="input-role" id="input-role">
+
+    <label for="input-email">Email: </label>
+    <input type="text" name="input-email" id="input-email">
+
+    <label for="input-phoneNumber">Phone Number: </label>
+    <input type="text" name="input-phoneNumber" id="input-phoneNumber">
+
+    <input type="submit">
+</form>
+
