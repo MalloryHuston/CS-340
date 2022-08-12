@@ -1,5 +1,5 @@
 /*
-/   Sets css style properties for the table on the Concerts page so that rows are hidden if they do not match the entered filter/search.
+/   Setfdsfs css style properties for the table on the Concerts page so that rows are hidden if they do not match the entered filter/search.
 /   Citation for the following function:
 /   Date: 08/03/2022
 /   Adapted from: freeCodeCamp
