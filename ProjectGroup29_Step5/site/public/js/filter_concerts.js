@@ -1,5 +1,9 @@
 /*
 /   Sets css style properties for the table on the Concerts page so that rows are hidden if they do not match the entered filter/search.
+/   Citation for the following function:
+/   Date: 08/03/2022
+/   Adapted from: freeCodeCamp
+/   Source URL: https://www.freecodecamp.org/news/build-a-responsive-filterable-form-with-css-and-javascript/
 */
 function filterConcert(filter_element) {
     let query = filter_element.value.toLowerCase();
