@@ -24,7 +24,7 @@ Be sure to always check which branch you are on using “git status” before yo
 
 ### 2. Merge your branch
 
-Once your branch is ready to be merged to master, follow these steps:
+Once your branch is ready to be merged to main, follow these steps:
 
 * While in your branch you will 
 <pre>
@@ -34,19 +34,19 @@ git push origin &lt;branch name&gt; – This creates the branch remotely and pus
 </pre>
 
 * Go to GitHub and create a new pull request
-  * You can compare your branch to any other branch, but you will most likely be comparing to master
+  * You can compare your branch to any other branch, but you will most likely be comparing to main
   * You can assign a specific person or not
   * You will not be able to approve your own pull request
 
-* Once someone reviews the pull request, they will resolve any issues or conflicts that come up and approve the pull request to be merged into the master
+* Once someone reviews the pull request, they will resolve any issues or conflicts that come up and approve the pull request to be merged into the main
 
 ### 3. Start each day off right
 
-Begin every day by pulling or fetching from the master to your local master.
+Begin every day by pulling or fetching from the main to your local main.
 
-* Pulling will automatically try to merge the recent commits from master and throw errors if there are any conflicts
+* Pulling will automatically try to merge the recent commits from main and throw errors if there are any conflicts
 * Fetching will gather the most recent commits in a branch which you can then view and decide to merge or not
-* Once you have all the most recent updates on your master you can then merge those changes into your branch:
+* Once you have all the most recent updates on your main you can then merge those changes into your branch:
 <pre>
 <code>git checkout &lt;branch name you want to update&gt;
 git merge &lt;branch name you're merging from&gt;</code>
